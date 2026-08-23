@@ -148,6 +148,47 @@
             transition: width 0.1s linear;
         }
 
+        /* Tombol sound toggle */
+        .sound-toggle {
+            position: absolute;
+            bottom: 80px;
+            right: 30px;
+            z-index: 3;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .sound-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .tap-hint {
+            position: absolute;
+            bottom: 140px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.7rem;
+            z-index: 3;
+            font-family: 'Space Mono', monospace;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
         @keyframes introPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.03); opacity: 0.9; }
@@ -259,7 +300,7 @@
             z-index: 0;
         }
 
-        /* ===== FALLING CONTENT (PHOTO/VIDEO) ===== */
+        /* ===== FALLING CONTENT ===== */
         .falling-item {
             position: fixed;
             pointer-events: none;
@@ -870,6 +911,19 @@
             .secret-container .secret-message {
                 font-size: 1.8rem;
             }
+
+            .sound-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                bottom: 70px;
+                right: 20px;
+            }
+
+            .tap-hint {
+                bottom: 120px;
+                font-size: 0.6rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -946,34 +1000,61 @@
                 width: 40px !important;
                 height: 40px !important;
             }
+
+            .sound-toggle {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+                bottom: 60px;
+                right: 15px;
+            }
+
+            .tap-hint {
+                bottom: 100px;
+                font-size: 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- ===== INTRO VIDEO SCREEN ===== -->
-<div id="introScreen">
-    <video id="introVideo" autoplay loop playsinline>
-        <source src="vidios.intro.mp4" type="video/mp4" />
-        <p>Videomu gak bisa diputar :( coba refresh</p>
-    </video>
-    
-    <div class="intro-overlay">
-        <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-        <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
-        <button class="intro-btn" id="startBtn">
-            <i class="fas fa-play"></i> Mulai Petualangan
-        </button>
-    </div>
+    <div id="introScreen">
+        <!-- VIDEO INTRO (DENGAN SUARA) -->
+        <video id="introVideo" autoplay loop playsinline>
+            <source src="vidios.intro.mp4" type="video/mp4" />
+            <p>Videomu gak bisa diputar :( coba refresh</p>
+        </video>
+        
+        <!-- OVERLAY -->
+        <div class="intro-overlay">
+            <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
+            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
+            <button class="intro-btn" id="startBtn">
+                <i class="fas fa-play"></i> Mulai Petualangan
+            </button>
+        </div>
 
-    <div class="intro-skip" id="skipBtn">
-        Skip <i class="fas fa-forward"></i>
-    </div>
+        <!-- TOMBOL SKIP -->
+        <div class="intro-skip" id="skipBtn">
+            Skip <i class="fas fa-forward"></i>
+        </div>
 
-    <div class="intro-progress">
-        <div class="bar" id="introProgressBar"></div>
+        <!-- PROGRESS BAR -->
+        <div class="intro-progress">
+            <div class="bar" id="introProgressBar"></div>
+        </div>
+
+        <!-- TOMBOL MUTE/UNMUTE -->
+        <div class="sound-toggle" id="soundToggle">
+            <i class="fas fa-volume-up"></i>
+        </div>
+
+        <!-- HINT TAP LAYAR (untuk HP) -->
+        <div class="tap-hint" style="display:none;">
+            🎵 Tap layar untuk mendengar suara
+        </div>
     </div>
-</div>
 
     <!-- ===== BOOT SCREEN ===== -->
     <div id="bootScreen">
@@ -1316,19 +1397,55 @@
         const skipBtn = document.getElementById('skipBtn');
         const progressBar = document.getElementById('introProgressBar');
 
-        // Cek apakah video bisa diputar
-        introVideo.addEventListener('error', function() {
-            console.log('Video error, coba fallback');
-            // Kalau video error, coba reload atau tampilkan pesan
+        // ===== SOUND TOGGLE =====
+        let isMuted = false;
+        const soundToggle = document.getElementById('soundToggle');
+
+        soundToggle.addEventListener('click', function() {
+            isMuted = !isMuted;
+            introVideo.muted = isMuted;
+            this.innerHTML = isMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
         });
 
+        // ===== CEK VIDEO ERROR =====
+        introVideo.addEventListener('error', function() {
+            console.log('⚠️ Video error, coba fallback');
+            setTimeout(() => {
+                introVideo.load();
+            }, 2000);
+        });
+
+        // ===== FUNCTION GO TO BOOT =====
         function goToBoot() {
+            // === MAININ SUARA VIDEO ===
+            try {
+                const playPromise = introVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('🎵 Video playing with sound');
+                    }).catch((error) => {
+                        console.log('🔇 Autoplay diblokir, user harus interaksi dulu');
+                        const hint = document.querySelector('.tap-hint');
+                        if (hint) hint.style.display = 'block';
+                    });
+                }
+            } catch (e) {
+                console.log('Error playing video:', e);
+            }
+
+            // === SEMBUNYIKAN INTRO ===
             introScreen.classList.add('hidden');
+
+            // === TAMPILKAN BOOT SCREEN ===
             setTimeout(() => {
                 bootScreen.classList.add('active');
+                
+                // === TAMPILKAN DESKTOP ===
                 setTimeout(() => {
                     bootScreen.classList.remove('active');
                     desktop.classList.add('active');
+                    
+                    // === MULAI FALLING CONTENT ===
                     setTimeout(() => {
                         startFallingContent();
                     }, 1000);
@@ -1336,9 +1453,11 @@
             }, 1500);
         }
 
+        // ===== EVENT LISTENER =====
         startBtn.addEventListener('click', goToBoot);
         skipBtn.addEventListener('click', goToBoot);
 
+        // ===== PROGRESS BAR VIDEO =====
         introVideo.addEventListener('timeupdate', () => {
             if (introVideo.duration) {
                 const percentage = (introVideo.currentTime / introVideo.duration) * 100;
@@ -1346,20 +1465,19 @@
             }
         });
 
+        // ===== KEYBOARD SHORTCUT =====
         document.addEventListener('keydown', (e) => {
             if ((e.key === 'Enter' || e.key === ' ') && !introScreen.classList.contains('hidden')) {
                 goToBoot();
             }
         });
 
-        // ===== FALLING CONTENT (PHOTO/VIDEO) =====
+        // ===== FALLING CONTENT =====
         let fallingInterval;
 
-        // ====== KONFIGURASI DI SINI ======
-        // Pilih mode: 'photo' atau 'video'
-        const FALLING_MODE = 'photo'; // ganti ke 'video' kalau mau pake video
+        // ====== KONFIGURASI ======
+        const FALLING_MODE = 'photo';
 
-        // Daftar foto yang mau dijatuhkan (taruh di folder images/)
         const photoList = [
             'images/foto1.jpg',
             'images/foto2.jpg',
@@ -1368,13 +1486,11 @@
             'images/foto5.jpg',
         ];
 
-        // Daftar video yang mau dijatuhkan (taruh di folder videos/)
         const videoList = [
             'videos/video1.mp4',
             'videos/video2.mp4',
         ];
 
-        // Ukuran item yang jatuh (random antara min dan max)
         const ITEM_SIZE_MIN = 50;
         const ITEM_SIZE_MAX = 100;
 
@@ -1393,12 +1509,10 @@
             const size = Math.random() * (ITEM_SIZE_MAX - ITEM_SIZE_MIN) + ITEM_SIZE_MIN;
             item.style.width = size + 'px';
             item.style.height = size + 'px';
-
             item.style.left = Math.random() * 90 + 5 + '%';
 
             const duration = Math.random() * 5 + 5;
             item.style.animationDuration = duration + 's';
-
             item.style.animationDelay = Math.random() * 0.5 + 's';
 
             if (FALLING_MODE === 'photo') {
@@ -1674,11 +1788,13 @@
             }
         });
 
+        // ===== CONSOLE LOG =====
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
         console.log('📸 Mode:', FALLING_MODE);
         console.log('📷 Jumlah foto:', photoList.length);
         console.log('🎬 Jumlah video:', videoList.length);
+        console.log('🎵 Sound mode: ON');
     </script>
 
 </body>
