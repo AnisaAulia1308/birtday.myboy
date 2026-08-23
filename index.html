@@ -952,30 +952,28 @@
 <body>
 
     <!-- ===== INTRO VIDEO SCREEN ===== -->
-    <div id="introScreen">
-        <video id="introVideo" autoplay muted loop playsinline>
-            <!-- PAKAI VIDEO DARI FOLDER vidio -->
-            <source src="vidios.intro.mp4" type="video/mp4" />
-            <!-- FALLBACK kalau video gak bisa diputar -->
-            <p>Videomu gak bisa diputar :( coba refresh</p>
-        </video>
-        
-        <div class="intro-overlay">
-            <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
-            <button class="intro-btn" id="startBtn">
-                <i class="fas fa-play"></i> Mulai Petualangan
-            </button>
-        </div>
-
-        <div class="intro-skip" id="skipBtn">
-            Skip <i class="fas fa-forward"></i>
-        </div>
-
-        <div class="intro-progress">
-            <div class="bar" id="introProgressBar"></div>
-        </div>
+<div id="introScreen">
+    <video id="introVideo" autoplay loop playsinline>
+        <source src="vidios.intro.mp4" type="video/mp4" />
+        <p>Videomu gak bisa diputar :( coba refresh</p>
+    </video>
+    
+    <div class="intro-overlay">
+        <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
+        <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
+        <button class="intro-btn" id="startBtn">
+            <i class="fas fa-play"></i> Mulai Petualangan
+        </button>
     </div>
+
+    <div class="intro-skip" id="skipBtn">
+        Skip <i class="fas fa-forward"></i>
+    </div>
+
+    <div class="intro-progress">
+        <div class="bar" id="introProgressBar"></div>
+    </div>
+</div>
 
     <!-- ===== BOOT SCREEN ===== -->
     <div id="bootScreen">
