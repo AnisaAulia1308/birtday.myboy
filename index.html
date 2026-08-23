@@ -954,8 +954,10 @@
     <!-- ===== INTRO VIDEO SCREEN ===== -->
     <div id="introScreen">
         <video id="introVideo" autoplay muted loop playsinline>
-            <source src="https://drive.google.com/file/d/13OB2m4KR9YktubXLgH187vG4TnZhunJ5/view?usp=drivesdk" type="video/mp4" />
-            <source src="https://drive.google.com/file/d/13OB2m4KR9YktubXLgH187vG4TnZhunJ5/view?usp=drivesdk" type="video/mp4" />
+            <!-- PAKAI VIDEO DARI FOLDER vidio -->
+            <source src="vidio/WhatsApp.Video.2026-08-23.at.18.24.55.1.mp4" type="video/mp4" />
+            <!-- FALLBACK kalau video gak bisa diputar -->
+            <p>Videomu gak bisa diputar :( coba refresh</p>
         </video>
         
         <div class="intro-overlay">
@@ -1403,7 +1405,6 @@
             if (FALLING_MODE === 'photo') {
                 // Mode FOTO
                 const img = document.createElement('img');
-                // Pilih foto random dari daftar
                 const randomPhoto = photoList[Math.floor(Math.random() * photoList.length)];
                 img.src = randomPhoto;
                 img.alt = 'Memory';
@@ -1423,7 +1424,6 @@
 
             document.body.appendChild(item);
 
-            // Hapus setelah animasi selesai
             setTimeout(() => {
                 if (item.parentNode) item.remove();
             }, duration * 1000 + 1000);
