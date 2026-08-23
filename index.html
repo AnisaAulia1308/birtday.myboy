@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>THE [NAMA] OS — VERSION [UMUR]</title>
+    <title>✨ Happy Birthday, Sayang! ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Fredoka+One&family=Patrick+Hand&family=Quicksand:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
@@ -962,7 +962,7 @@
         
         <div class="intro-overlay">
             <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-            <div class="intro-subtitle">A FILM BY [PACAR KAMU]</div>
+            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
             <button class="intro-btn" id="startBtn">
                 <i class="fas fa-play"></i> Mulai Petualangan
             </button>
@@ -1318,6 +1318,12 @@
         const skipBtn = document.getElementById('skipBtn');
         const progressBar = document.getElementById('introProgressBar');
 
+        // Cek apakah video bisa diputar
+        introVideo.addEventListener('error', function() {
+            console.log('Video error, coba fallback');
+            // Kalau video error, coba reload atau tampilkan pesan
+        });
+
         function goToBoot() {
             introScreen.classList.add('hidden');
             setTimeout(() => {
@@ -1377,7 +1383,6 @@
         function startFallingContent() {
             if (fallingInterval) clearInterval(fallingInterval);
             
-            // Jatuhkan 1 item setiap 400-800ms
             fallingInterval = setInterval(() => {
                 createFallingItem();
             }, Math.random() * 400 + 400);
@@ -1387,23 +1392,18 @@
             const item = document.createElement('div');
             item.className = 'falling-item';
 
-            // Ukuran random
             const size = Math.random() * (ITEM_SIZE_MAX - ITEM_SIZE_MIN) + ITEM_SIZE_MIN;
             item.style.width = size + 'px';
             item.style.height = size + 'px';
 
-            // Posisi horizontal random
             item.style.left = Math.random() * 90 + 5 + '%';
 
-            // Durasi jatuh random (5-10 detik)
             const duration = Math.random() * 5 + 5;
             item.style.animationDuration = duration + 's';
 
-            // Delay random
             item.style.animationDelay = Math.random() * 0.5 + 's';
 
             if (FALLING_MODE === 'photo') {
-                // Mode FOTO
                 const img = document.createElement('img');
                 const randomPhoto = photoList[Math.floor(Math.random() * photoList.length)];
                 img.src = randomPhoto;
@@ -1411,7 +1411,6 @@
                 img.loading = 'lazy';
                 item.appendChild(img);
             } else {
-                // Mode VIDEO
                 const video = document.createElement('video');
                 const randomVideo = videoList[Math.floor(Math.random() * videoList.length)];
                 video.src = randomVideo;
