@@ -1050,7 +1050,7 @@
             <i class="fas fa-volume-up"></i>
         </div>
 
-        <!-- HINT TAP LAYAR (untuk HP) -->
+        <!-- HINT TAP LAYAR -->
         <div class="tap-hint" style="display:none;">
             🎵 Tap layar untuk mendengar suara
         </div>
@@ -1407,32 +1407,11 @@
             this.innerHTML = isMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
         });
 
-        // ===== CEK VIDEO ERROR =====
-        introVideo.addEventListener('error', function() {
-            console.log('⚠️ Video error, coba fallback');
-            setTimeout(() => {
-                introVideo.load();
-            }, 2000);
-        });
-
         // ===== FUNCTION GO TO BOOT =====
         function goToBoot() {
-            // === MAININ SUARA VIDEO ===
-            try {
-                const playPromise = introVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        console.log('🎵 Video playing with sound');
-                    }).catch((error) => {
-                        console.log('🔇 Autoplay diblokir, user harus interaksi dulu');
-                        const hint = document.querySelector('.tap-hint');
-                        if (hint) hint.style.display = 'block';
-                    });
-                }
-            } catch (e) {
-                console.log('Error playing video:', e);
-            }
-
+            // === PAUSE VIDEO INTRO ===
+            introVideo.pause();
+            
             // === SEMBUNYIKAN INTRO ===
             introScreen.classList.add('hidden');
 
