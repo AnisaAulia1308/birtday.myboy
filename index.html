@@ -1176,7 +1176,7 @@
 
     <script>
         // ============================================
-        // ===== DATA GAME =====
+        // ===== DATA GAME (3 FOTO BERBEDA) =====
         // ============================================
         const gameData = [{
             photo: 'puzzle.jpeg',
@@ -1185,13 +1185,13 @@
             correct: 0,
             story: 'Yup, ini waktu kita pertama kali date! Kamu pake baju biru, aku gugup setengah mati 😭❤️'
         }, {
-            photo: 'puzzle.jpeg',
+            photo: 'intro.jpeg',
             question: 'Coba inget ini momen apa? 🤔',
             options: ['Ultah kamu', 'Ultah aku', 'Nonton film', 'Jalan-jalan'],
             correct: 1,
             story: 'Ini pas ultah aku! Kamu kasih kue surprise dan aku nangis haru 😭🎂'
         }, {
-            photo: 'puzzle.jpeg',
+            photo: 'foto3.jpg',
             question: 'Terakhir, ini momen apa hayoo? 😏',
             options: ['Liburan ke pantai', 'Main ke mall', 'Makan malam', 'Nonton bioskop'],
             correct: 2,
@@ -1279,7 +1279,6 @@
                 btn.classList.remove('correct', 'wrong', 'disabled');
             });
 
-            // Update progress
             updateProgress();
 
             // Set foto (blur)
@@ -1318,13 +1317,11 @@
                     <div class="feedback-text correct">🥳 CORRECT! Kamu inget!</div>
                     <div class="feedback-story">"${data.story}"</div>
                 `;
-                // Buka foto
                 blurOverlay.classList.add('hidden');
                 revealLabel.textContent = `✨ ${data.story}`;
                 revealLabel.classList.add('show');
             } else {
                 btn.classList.add('wrong');
-                // Tampilkan jawaban yang benar
                 allBtns.forEach(b => {
                     if (parseInt(b.dataset.index) === correct) {
                         b.classList.add('correct');
@@ -1334,7 +1331,6 @@
                     <div class="feedback-text wrong">😭 EITSS SALAH! Masa lupa sih??</div>
                     <div class="feedback-story">Jawabannya: "${data.options[correct]}"</div>
                 `;
-                // Tetep buka foto biar dia inget
                 setTimeout(() => {
                     blurOverlay.classList.add('hidden');
                     revealLabel.textContent = `💭 Sebenarnya ini: ${data.story}`;
@@ -1342,7 +1338,6 @@
                 }, 600);
             }
 
-            // Show next button
             nextBtn.classList.add('show');
         }
 
@@ -1360,7 +1355,6 @@
             });
         }
 
-        // Next button
         nextBtn.addEventListener('click', () => {
             currentLevel++;
             if (currentLevel >= gameData.length) {
@@ -1400,7 +1394,7 @@
                 item.style.animationDelay = Math.random() * 0.5 + 's';
 
                 const img = document.createElement('img');
-                const photos = ['puzzle.jpeg', 'puzzle.jpeg', 'puzzle.jpeg'];
+                const photos = ['puzzle.jpeg', 'intro.jpeg', 'foto3.jpg'];
                 img.src = photos[Math.floor(Math.random() * photos.length)];
                 img.alt = 'Memory';
                 img.loading = 'lazy';
@@ -1625,8 +1619,8 @@
 
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
-        console.log('🎮 Guess The Memory Game: ON');
-        console.log('📸 Intro: intro.jpeg | Game foto: puzzle.jpeg');
+        console.log('🎮 Guess The Memory Game: ON (3 foto berbeda)');
+        console.log('📸 Intro: intro.jpeg | Game: puzzle.jpeg, intro.jpeg, foto3.jpg');
     </script>
 
 </body>
