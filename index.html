@@ -23,7 +23,7 @@
             width: 100vw;
         }
 
-        /* ===== INTRO FOTO ===== */
+        /* ===== INTRO FOTO + PUZZLE ===== */
         #introScreen {
             position: fixed;
             top: 0;
@@ -51,89 +51,213 @@
             position: absolute;
             top: 0;
             left: 0;
+            filter: blur(8px);
+            transform: scale(1.1);
         }
 
-        .intro-overlay {
+        /* ===== PUZZLE CONTAINER ===== */
+        .puzzle-container {
+            position: relative;
+            z-index: 3;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 30px 40px 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        .puzzle-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #ff6b9d;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .puzzle-subtitle {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* ===== PUZZLE SLIDER ===== */
+        .puzzle-slider-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: #1a1a1a;
+        }
+
+        .puzzle-slider-container .puzzle-bg {
+            width: 100%;
+            height: 200px;
+            background: url('intro.jpeg') center/cover no-repeat;
+            filter: blur(4px);
+            opacity: 0.3;
+        }
+
+        .puzzle-slider-track {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.35);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 2;
-            padding: 20px;
+            overflow: hidden;
         }
 
-        .intro-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
+        .puzzle-slider-piece {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('intro.jpeg') center/cover no-repeat;
+            clip-path: inset(0 70% 0 0);
+            transition: clip-path 0.1s ease;
+            border-radius: 14px;
+        }
+
+        .puzzle-slider-piece .slider-handle {
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 60px;
+            background: linear-gradient(180deg, #ff6b9d, #ffb6c1);
+            border-radius: 8px;
+            cursor: grab;
+            box-shadow: 0 0 20px rgba(255,107,157,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
             color: #fff;
-            text-shadow: 0 0 40px rgba(255,107,157,0.5), 0 0 80px rgba(255,107,157,0.2);
-            animation: introPulse 2s ease-in-out infinite;
-            text-align: center;
+            touch-action: none;
+            user-select: none;
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
-        .intro-subtitle {
+        .puzzle-slider-piece .slider-handle:active {
+            cursor: grabbing;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* ===== PUZZLE INFO ===== */
+        .puzzle-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
             font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 10px;
-            letter-spacing: 4px;
         }
 
-        .intro-btn {
-            margin-top: 40px;
-            padding: 16px 50px;
-            background: rgba(255,107,157,0.2);
-            border: 2px solid #ff6b9d;
+        .puzzle-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+
+        .puzzle-progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ffb6c1);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .puzzle-status {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.3);
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .puzzle-status .highlight {
+            color: #ff6b9d;
+        }
+
+        /* ===== BUTTONS ===== */
+        .puzzle-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .puzzle-btn {
+            padding: 12px 30px;
             border-radius: 60px;
-            color: #fff;
+            border: none;
             font-family: 'Fredoka One', cursive;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: 0.4s;
-            backdrop-filter: blur(10px);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        .intro-btn:hover {
-            background: #ff6b9d;
+        .puzzle-btn.primary {
+            background: linear-gradient(135deg, #ff6b9d, #ffb6c1);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .puzzle-btn.primary.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .puzzle-btn.primary.active:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255,107,157,0.4);
+            box-shadow: 0 12px 35px rgba(255,107,157,0.5);
         }
 
-        .intro-btn i {
-            margin-right: 10px;
-        }
-
-        .intro-skip {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
+        .puzzle-btn.skip {
+            background: rgba(255,255,255,0.05);
             color: rgba(255,255,255,0.3);
-            font-size: 0.8rem;
-            cursor: pointer;
-            z-index: 3;
-            font-family: 'Space Mono', monospace;
             border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.7rem;
             padding: 8px 16px;
-            border-radius: 20px;
-            transition: 0.3s;
-            background: rgba(0,0,0,0.3);
         }
 
-        .intro-skip:hover {
-            color: rgba(255,255,255,0.7);
-            border-color: rgba(255,255,255,0.3);
+        .puzzle-btn.skip:hover {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
         }
 
-        @keyframes introPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.03); opacity: 0.9; }
+        /* ===== OVERLAY TEXT ===== */
+        .puzzle-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.15);
+            font-size: 3rem;
+            font-family: 'Great Vibes', cursive;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.2;
+            z-index: 1;
         }
 
         /* ===== BOOTING SCREEN ===== */
@@ -500,13 +624,12 @@
             border-radius: 4px;
         }
 
-        /* ===== APP: MEMORIES ===== */
+        /* ===== APP STYLES (singkat) ===== */
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
         }
-
         .memory-item {
             background: rgba(255,255,255,0.05);
             border-radius: 8px;
@@ -516,35 +639,29 @@
             transition: 0.3s;
             border: 1px solid transparent;
         }
-
         .memory-item:hover {
             background: rgba(255,255,255,0.08);
             border-color: #ff6b9d;
             transform: translateY(-2px);
         }
-
         .memory-item .emoji {
             font-size: 3rem;
             display: block;
             margin-bottom: 10px;
         }
-
         .memory-item .title {
             font-size: 0.8rem;
             color: rgba(255,255,255,0.8);
         }
-
         .memory-item .date {
             font-size: 0.6rem;
             color: rgba(255,255,255,0.4);
         }
 
-        /* ===== APP: CHAT ===== */
         .chat-container {
             max-width: 500px;
             margin: 0 auto;
         }
-
         .chat-msg {
             padding: 10px 15px;
             border-radius: 12px;
@@ -552,33 +669,28 @@
             max-width: 80%;
             font-size: 0.9rem;
         }
-
         .chat-msg.me {
             background: rgba(255,107,157,0.2);
             border: 1px solid rgba(255,107,157,0.3);
             margin-left: auto;
             border-bottom-right-radius: 4px;
         }
-
         .chat-msg.you {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.05);
             margin-right: auto;
             border-bottom-left-radius: 4px;
         }
-
         .chat-msg .sender {
             font-size: 0.6rem;
             color: rgba(255,255,255,0.4);
             margin-bottom: 4px;
         }
 
-        /* ===== APP: SONG ===== */
         .song-player-app {
             text-align: center;
             padding: 20px;
         }
-
         .song-player-app .album-art {
             width: 150px;
             height: 150px;
@@ -590,19 +702,16 @@
             justify-content: center;
             font-size: 4rem;
         }
-
         .song-player-app .song-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 4px;
         }
-
         .song-player-app .song-artist {
             font-size: 0.9rem;
             color: rgba(255,255,255,0.6);
             margin-bottom: 20px;
         }
-
         .song-progress {
             width: 100%;
             max-width: 400px;
@@ -612,21 +721,18 @@
             margin: 10px auto;
             cursor: pointer;
         }
-
         .song-progress .fill {
             height: 100%;
             background: #ff6b9d;
             border-radius: 4px;
             width: 0%;
         }
-
         .song-controls {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-top: 15px;
         }
-
         .song-controls button {
             background: none;
             border: none;
@@ -635,19 +741,16 @@
             cursor: pointer;
             transition: 0.3s;
         }
-
         .song-controls button:hover {
             color: #ff6b9d;
             transform: scale(1.1);
         }
 
-        /* ===== APP: WHY YOU ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
         }
-
         .why-item {
             background: rgba(255,255,255,0.05);
             border-radius: 8px;
@@ -655,25 +758,21 @@
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
         }
-
         .why-item .emoji {
             font-size: 2.5rem;
             display: block;
             margin-bottom: 8px;
         }
-
         .why-item .text {
             font-size: 0.9rem;
             color: rgba(255,255,255,0.8);
         }
 
-        /* ===== APP: PLACES ===== */
         .places-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 15px;
         }
-
         .place-item {
             background: rgba(255,255,255,0.05);
             border-radius: 8px;
@@ -683,37 +782,31 @@
             cursor: pointer;
             transition: 0.3s;
         }
-
         .place-item:hover {
             background: rgba(255,255,255,0.08);
             transform: scale(1.02);
         }
-
         .place-item .emoji {
             font-size: 2.5rem;
             display: block;
             margin-bottom: 8px;
         }
 
-        /* ===== APP: GAME ===== */
         .game-container {
             max-width: 500px;
             margin: 0 auto;
             text-align: center;
         }
-
         .game-question {
             font-size: 1.1rem;
             margin-bottom: 20px;
             line-height: 1.6;
         }
-
         .game-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
         .game-option {
             padding: 12px;
             border: 1px solid rgba(255,255,255,0.1);
@@ -724,22 +817,18 @@
             transition: 0.3s;
             font-family: 'Quicksand', sans-serif;
         }
-
         .game-option:hover {
             background: rgba(255,107,157,0.1);
             border-color: #ff6b9d;
         }
-
         .game-option.correct {
             background: rgba(0,255,136,0.1);
             border-color: #00ff88;
         }
-
         .game-option.wrong {
             background: rgba(255,87,87,0.1);
             border-color: #ff5757;
         }
-
         .game-score {
             font-family: 'Space Mono', monospace;
             color: #00ff88;
@@ -747,25 +836,21 @@
             margin-bottom: 20px;
         }
 
-        /* ===== APP: SECRET ===== */
         .secret-container {
             text-align: center;
             padding: 30px;
         }
-
         .secret-container .big-emoji {
             font-size: 5rem;
             display: block;
             margin-bottom: 20px;
         }
-
         .secret-container .secret-message {
             font-family: 'Great Vibes', cursive;
             font-size: 2.5rem;
             color: #ff6b9d;
             margin-bottom: 20px;
         }
-
         .secret-container .secret-sub {
             font-size: 1.1rem;
             color: rgba(255,255,255,0.7);
@@ -797,32 +882,25 @@
                 font-size: 0.6rem;
                 padding: 3px 8px;
             }
-            .memory-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            .puzzle-container {
+                padding: 20px;
             }
-            .game-options {
-                grid-template-columns: 1fr;
+            .puzzle-title {
+                font-size: 1.5rem;
             }
-            .why-grid {
-                grid-template-columns: 1fr;
+            .puzzle-slider-container .puzzle-bg {
+                height: 150px;
             }
-            .places-grid {
-                grid-template-columns: 1fr;
-            }
-            .intro-title {
-                font-size: 2.5rem;
-            }
-            .intro-subtitle {
-                font-size: 0.9rem;
+            .puzzle-slider-piece .slider-handle {
+                height: 40px;
+                width: 12px;
+                right: -6px;
             }
             .boot-title {
                 font-size: 2rem;
             }
             .boot-progress {
                 width: 200px;
-            }
-            .secret-container .secret-message {
-                font-size: 1.8rem;
             }
         }
 
@@ -865,22 +943,38 @@
             .window-body {
                 padding: 12px;
             }
-            .memory-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 8px;
+            .puzzle-container {
+                padding: 15px;
+                border-radius: 16px;
             }
-            .memory-item {
-                padding: 12px;
+            .puzzle-title {
+                font-size: 1.2rem;
             }
-            .memory-item .emoji {
-                font-size: 2rem;
+            .puzzle-subtitle {
+                font-size: 0.6rem;
             }
-            .intro-title {
-                font-size: 2rem;
+            .puzzle-slider-container .puzzle-bg {
+                height: 120px;
             }
-            .intro-btn {
-                padding: 12px 30px;
-                font-size: 0.9rem;
+            .puzzle-slider-piece .slider-handle {
+                height: 30px;
+                width: 10px;
+                right: -5px;
+                font-size: 0.5rem;
+            }
+            .puzzle-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .puzzle-btn {
+                width: 100%;
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            .puzzle-btn.skip {
+                width: auto;
+                padding: 6px 14px;
+                font-size: 0.6rem;
             }
             .falling-item {
                 width: 40px !important;
@@ -891,28 +985,57 @@
 </head>
 <body>
 
-    <!-- ===== INTRO FOTO ===== -->
+    <!-- ===== INTRO FOTO + PUZZLE ===== -->
     <div id="introScreen">
-        <!-- FOTO BACKGROUND -->
+        <!-- FOTO BACKGROUND (BLUR) -->
         <div id="introImage"></div>
         
-        <!-- OVERLAY -->
-        <div class="intro-overlay">
-            <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-            <div class="intro-subtitle">A FILM BY ANISA </div>
-            <button class="intro-btn" id="startBtn">
-                <i class="fas fa-play"></i> Mulai Petualangan
-            </button>
-        </div>
+        <!-- PUZZLE CONTAINER -->
+        <div class="puzzle-container">
+            <div class="puzzle-title">✨ Selesaikan Puzzle ✨</div>
+            <div class="puzzle-subtitle">Geser untuk membuka pintu</div>
 
-        <div class="intro-skip" id="skipBtn">
-            Skip <i class="fas fa-forward"></i>
+            <!-- PUZZLE SLIDER -->
+            <div class="puzzle-slider-container" id="puzzleSlider">
+                <div class="puzzle-bg"></div>
+                <div class="puzzle-slider-track">
+                    <div class="puzzle-slider-piece" id="puzzlePiece">
+                        <div class="slider-handle" id="sliderHandle">
+                            <i class="fas fa-grip-lines"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-overlay-text">❤️</div>
+            </div>
+
+            <!-- PROGRESS -->
+            <div class="puzzle-info">
+                <span>0%</span>
+                <div class="puzzle-progress-bar">
+                    <div class="fill" id="puzzleProgress"></div>
+                </div>
+                <span>100%</span>
+            </div>
+
+            <div class="puzzle-status" id="puzzleStatus">
+                Geser <span class="highlight">▶</span> ke kanan untuk menyelesaikan
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="puzzle-buttons">
+                <button class="puzzle-btn primary" id="enterBtn">
+                    <i class="fas fa-arrow-right"></i> Mulai Petualangan
+                </button>
+                <button class="puzzle-btn skip" id="skipBtn">
+                    Skip <i class="fas fa-forward"></i>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- ===== BOOT SCREEN ===== -->
     <div id="bootScreen">
-        <div class="boot-title">✨ [] OS ✨radel virdiana</div>
+        <div class="boot-title">✨ [NAMA DIA] OS ✨</div>
         <div class="boot-text">> Booting system...</div>
         <div class="boot-text">> Loading memories...</div>
         <div class="boot-text">> Loading stupid jokes...</div>
@@ -1242,17 +1365,158 @@
     </div>
 
     <script>
-        // ===== INTRO FOTO LOGIC =====
+        // ============================================
+        // ===== PUZZLE SLIDER LOGIC =====
+        // ============================================
+        const sliderHandle = document.getElementById('sliderHandle');
+        const puzzlePiece = document.getElementById('puzzlePiece');
+        const puzzleProgress = document.getElementById('puzzleProgress');
+        const puzzleStatus = document.getElementById('puzzleStatus');
+        const enterBtn = document.getElementById('enterBtn');
+        const skipBtn = document.getElementById('skipBtn');
         const introScreen = document.getElementById('introScreen');
         const bootScreen = document.getElementById('bootScreen');
         const desktop = document.getElementById('desktop');
-        const startBtn = document.getElementById('startBtn');
-        const skipBtn = document.getElementById('skipBtn');
+
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let progress = 0;
+        let isComplete = false;
+
+        // ===== DRAG FUNCTIONS =====
+        function startDrag(e) {
+            if (isComplete) return;
+            isDragging = true;
+            const touch = e.touches ? e.touches[0] : e;
+            startX = touch.clientX;
+            sliderHandle.style.cursor = 'grabbing';
+            e.preventDefault();
+        }
+
+        function moveDrag(e) {
+            if (!isDragging || isComplete) return;
+            const touch = e.touches ? e.touches[0] : e;
+            const deltaX = touch.clientX - startX;
+            
+            // Batasi pergerakan
+            const container = document.getElementById('puzzleSlider');
+            const containerWidth = container.offsetWidth - 20;
+            const maxMove = containerWidth - 40;
+            
+            currentX = Math.max(0, Math.min(deltaX, maxMove));
+            
+            // Update progress
+            progress = (currentX / maxMove) * 100;
+            progress = Math.min(100, Math.max(0, progress));
+            
+            // Update visual
+            const pieceWidth = containerWidth;
+            const clipValue = (progress / 100) * pieceWidth;
+            puzzlePiece.style.clipPath = `inset(0 ${pieceWidth - clipValue}px 0 0)`;
+            
+            // Update progress bar
+            puzzleProgress.style.width = progress + '%';
+            
+            // Update status
+            if (progress >= 100) {
+                completePuzzle();
+            } else {
+                puzzleStatus.innerHTML = `Geser <span class="highlight">▶</span> ke kanan untuk menyelesaikan`;
+                puzzleStatus.style.color = 'rgba(255,255,255,0.3)';
+            }
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            sliderHandle.style.cursor = 'grab';
+            
+            // Kalau belum complete dan progress < 50%, balikin ke awal
+            if (!isComplete && progress < 50) {
+                resetPuzzle();
+            }
+        }
+
+        // ===== COMPLETE PUZZLE =====
+        function completePuzzle() {
+            isComplete = true;
+            puzzleStatus.innerHTML = '✅ <span style="color:#00ff88;">Selesai! Selamat!</span>';
+            puzzleStatus.style.color = '#00ff88';
+            enterBtn.classList.add('active');
+            enterBtn.style.opacity = '1';
+            enterBtn.style.pointerEvents = 'auto';
+            puzzlePiece.style.clipPath = 'inset(0 0 0 0)';
+            puzzleProgress.style.width = '100%';
+            
+            // Efek particle sederhana
+            createCelebration();
+        }
+
+        // ===== RESET PUZZLE =====
+        function resetPuzzle() {
+            if (isComplete) return;
+            progress = 0;
+            currentX = 0;
+            const container = document.getElementById('puzzleSlider');
+            const containerWidth = container.offsetWidth - 20;
+            puzzlePiece.style.clipPath = `inset(0 ${containerWidth}px 0 0)`;
+            puzzleProgress.style.width = '0%';
+            puzzleStatus.innerHTML = `Geser <span class="highlight">▶</span> ke kanan untuk menyelesaikan`;
+            puzzleStatus.style.color = 'rgba(255,255,255,0.3)';
+        }
+
+        // ===== CELEBRATION =====
+        function createCelebration() {
+            const emojis = ['🎉', '✨', '💖', '🎊', '❤️', '⭐', '🌈', '💕'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    el.style.cssText = `
+                        position: fixed;
+                        font-size: ${Math.random() * 2 + 1}rem;
+                        left: ${Math.random() * 100}%;
+                        top: -20px;
+                        z-index: 99999;
+                        pointer-events: none;
+                        animation: fall 3s linear forwards;
+                        animation-delay: ${Math.random() * 0.5}s;
+                    `;
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 4000);
+                }, i * 50);
+            }
+        }
+
+        // ===== EVENT LISTENERS =====
+        // Mouse
+        sliderHandle.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', moveDrag);
+        document.addEventListener('mouseup', endDrag);
+
+        // Touch
+        sliderHandle.addEventListener('touchstart', startDrag, { passive: false });
+        document.addEventListener('touchmove', moveDrag, { passive: false });
+        document.addEventListener('touchend', endDrag, { passive: false });
+
+        // ===== ENTER BUTTON =====
+        enterBtn.addEventListener('click', goToBoot);
+        skipBtn.addEventListener('click', goToBoot);
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && isComplete && !introScreen.classList.contains('hidden')) {
+                goToBoot();
+            }
+            if (e.key === 'Escape' && !introScreen.classList.contains('hidden')) {
+                goToBoot(); // Skip via Escape
+            }
+        });
 
         // ===== FUNCTION GO TO BOOT =====
         function goToBoot() {
             introScreen.classList.add('hidden');
-
             setTimeout(() => {
                 bootScreen.classList.add('active');
                 setTimeout(() => {
@@ -1265,21 +1529,9 @@
             }, 1500);
         }
 
-        // ===== EVENT LISTENER =====
-        startBtn.addEventListener('click', goToBoot);
-        skipBtn.addEventListener('click', goToBoot);
-
-        // ===== KEYBOARD SHORTCUT =====
-        document.addEventListener('keydown', (e) => {
-            if ((e.key === 'Enter' || e.key === ' ') && !introScreen.classList.contains('hidden')) {
-                goToBoot();
-            }
-        });
-
         // ===== FALLING CONTENT =====
         let fallingInterval;
 
-        const FALLING_MODE = 'photo';
         const photoListFalling = [
             'images/foto1.jpg',
             'images/foto2.jpg',
@@ -1575,7 +1827,7 @@
 
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
-        console.log('📸 Intro foto: intro.jpeg');
+        console.log('🧩 Puzzle mode: ON');
     </script>
 
 </body>
