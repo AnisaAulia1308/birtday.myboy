@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Fredoka+One&family=Patrick+Hand&family=Quicksand:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +22,7 @@
             width: 100vw;
         }
 
-        /* ===== INTRO FOTO ===== */
+        /* ===== INTRO ===== */
         #introScreen {
             position: fixed;
             top: 0;
@@ -38,12 +37,10 @@
             z-index: 99999;
             transition: opacity 1.5s ease;
         }
-
         #introScreen.hidden {
             opacity: 0;
             pointer-events: none;
         }
-
         #introImage {
             width: 100%;
             height: 100%;
@@ -52,7 +49,6 @@
             top: 0;
             left: 0;
         }
-
         .intro-overlay {
             position: absolute;
             top: 0;
@@ -67,7 +63,6 @@
             z-index: 2;
             padding: 20px;
         }
-
         .intro-title {
             font-family: 'Great Vibes', cursive;
             font-size: 4rem;
@@ -76,7 +71,6 @@
             animation: introPulse 2s ease-in-out infinite;
             text-align: center;
         }
-
         .intro-subtitle {
             font-family: 'Space Mono', monospace;
             font-size: 1.2rem;
@@ -84,7 +78,6 @@
             margin-top: 10px;
             letter-spacing: 4px;
         }
-
         .intro-btn {
             margin-top: 40px;
             padding: 16px 50px;
@@ -99,23 +92,20 @@
             backdrop-filter: blur(10px);
             letter-spacing: 2px;
         }
-
         .intro-btn:hover {
             background: #ff6b9d;
             transform: scale(1.05);
             box-shadow: 0 0 40px rgba(255,107,157,0.4);
         }
-
         .intro-btn i {
             margin-right: 10px;
         }
-
         @keyframes introPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.03); opacity: 0.9; }
         }
 
-        /* ===== BOOT SCREEN ===== */
+        /* ===== BOOT ===== */
         #bootScreen {
             position: fixed;
             top: 0;
@@ -130,11 +120,7 @@
             z-index: 10000;
             font-family: 'Space Mono', monospace;
         }
-
-        #bootScreen.active {
-            display: flex;
-        }
-
+        #bootScreen.active { display: flex; }
         .boot-text {
             color: #00ff88;
             font-size: 0.9rem;
@@ -142,7 +128,6 @@
             opacity: 0;
             animation: bootFade 0.3s forwards;
         }
-
         .boot-text:nth-child(1) { animation-delay: 0.2s; }
         .boot-text:nth-child(2) { animation-delay: 0.6s; }
         .boot-text:nth-child(3) { animation-delay: 1.0s; }
@@ -150,12 +135,10 @@
         .boot-text:nth-child(5) { animation-delay: 1.8s; }
         .boot-text:nth-child(6) { animation-delay: 2.2s; }
         .boot-text:nth-child(7) { animation-delay: 2.8s; }
-
         @keyframes bootFade {
             0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
         .boot-progress {
             width: 300px;
             height: 4px;
@@ -166,7 +149,6 @@
             opacity: 0;
             animation: bootFade 0.3s forwards 2.5s;
         }
-
         .boot-progress .bar {
             height: 100%;
             background: #00ff88;
@@ -174,12 +156,10 @@
             border-radius: 4px;
             animation: bootProgress 2s forwards 2.8s;
         }
-
         @keyframes bootProgress {
             0% { width: 0%; }
             100% { width: 100%; }
         }
-
         .boot-title {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
@@ -189,7 +169,7 @@
             animation: bootFade 0.5s forwards 0.1s;
         }
 
-        /* ===== PUZZLE SCREEN (JIGSAW) ===== */
+        /* ===== PUZZLE SCREEN ===== */
         #puzzleScreen {
             position: fixed;
             top: 0;
@@ -204,29 +184,23 @@
             z-index: 9000;
             padding: 20px;
         }
-
-        #puzzleScreen.active {
-            display: flex;
-        }
+        #puzzleScreen.active { display: flex; }
 
         .puzzle-header {
             text-align: center;
             margin-bottom: 15px;
         }
-
         .puzzle-header h2 {
             font-family: 'Great Vibes', cursive;
             font-size: 2.5rem;
             color: #ff6b9d;
         }
-
         .puzzle-header p {
             font-size: 0.8rem;
             color: rgba(255,255,255,0.4);
             font-family: 'Space Mono', monospace;
         }
 
-        /* ===== PUZZLE LAYOUT ===== */
         .puzzle-layout {
             display: flex;
             gap: 30px;
@@ -237,7 +211,7 @@
             width: 100%;
         }
 
-        /* ===== GRID DROP ZONE ===== */
+        /* ===== GRID ===== */
         .puzzle-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -257,21 +231,19 @@
             border: 2px dashed rgba(255,255,255,0.06);
             transition: all 0.3s ease;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             min-height: 90px;
         }
 
         .puzzle-slot.drag-over {
             border-color: #ff6b9d;
-            background: rgba(255,107,157,0.1);
-            transform: scale(1.02);
+            background: rgba(255,107,157,0.15);
+            transform: scale(1.03);
         }
 
         .puzzle-slot.filled {
             border-color: rgba(255,255,255,0.1);
             border-style: solid;
+            background: transparent;
         }
 
         .puzzle-slot .slot-number {
@@ -279,35 +251,20 @@
             bottom: 3px;
             right: 6px;
             font-size: 0.4rem;
-            color: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.08);
             font-family: 'Space Mono', monospace;
         }
 
-        /* ===== PIECES ===== */
+        /* ===== PIECE ===== */
         .puzzle-piece {
             width: 100%;
             height: 100%;
             border-radius: 6px;
-            cursor: grab;
             background-size: 300% 300%;
             background-repeat: no-repeat;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
             border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .puzzle-piece:active {
-            cursor: grabbing;
-        }
-
-        .puzzle-piece.dragging {
-            opacity: 0.6;
-            transform: scale(0.95);
-        }
-
-        .puzzle-piece.placed {
+            position: relative;
             cursor: default;
-            border-color: rgba(255,255,255,0.05);
         }
 
         .puzzle-piece .piece-label {
@@ -319,16 +276,16 @@
             font-family: 'Space Mono', monospace;
         }
 
-        /* ===== PIECES POOL ===== */
+        /* ===== POOL ===== */
         .puzzle-pool {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 8px;
             width: 180px;
             flex-shrink: 0;
         }
 
-        .puzzle-pool .pool-piece {
+        .pool-piece {
             aspect-ratio: 1/1;
             background-size: 300% 300%;
             background-repeat: no-repeat;
@@ -340,17 +297,17 @@
             min-height: 50px;
         }
 
-        .puzzle-pool .pool-piece:hover {
+        .pool-piece:hover {
             border-color: #ff6b9d;
             transform: scale(1.05);
             z-index: 2;
         }
 
-        .puzzle-pool .pool-piece:active {
+        .pool-piece:active {
             cursor: grabbing;
         }
 
-        .puzzle-pool .pool-piece .piece-label {
+        .pool-piece .piece-label {
             position: absolute;
             bottom: 2px;
             right: 4px;
@@ -359,11 +316,11 @@
             font-family: 'Space Mono', monospace;
         }
 
-        .puzzle-pool .pool-piece.placed {
+        .pool-piece.hidden {
             display: none;
         }
 
-        /* ===== PUZZLE INFO ===== */
+        /* ===== INFO ===== */
         .puzzle-info {
             display: flex;
             justify-content: space-between;
@@ -376,28 +333,19 @@
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.05);
         }
-
         .puzzle-info .moves {
             font-family: 'Space Mono', monospace;
             font-size: 0.8rem;
             color: rgba(255,255,255,0.5);
         }
-
-        .puzzle-info .moves span {
-            color: #ff6b9d;
-        }
-
+        .puzzle-info .moves span { color: #ff6b9d; }
         .puzzle-info .timer {
             font-family: 'Space Mono', monospace;
             font-size: 0.8rem;
             color: rgba(255,255,255,0.5);
         }
+        .puzzle-info .timer span { color: #00ff88; }
 
-        .puzzle-info .timer span {
-            color: #00ff88;
-        }
-
-        /* ===== PUZZLE BUTTONS ===== */
         .puzzle-buttons {
             display: flex;
             gap: 12px;
@@ -405,7 +353,6 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .puzzle-btn {
             padding: 10px 28px;
             border-radius: 60px;
@@ -416,7 +363,6 @@
             transition: 0.4s;
             letter-spacing: 1px;
         }
-
         .puzzle-btn.primary {
             background: linear-gradient(135deg, #ff6b9d, #ffb6c1);
             color: #fff;
@@ -424,23 +370,19 @@
             opacity: 0.4;
             pointer-events: none;
         }
-
         .puzzle-btn.primary.active {
             opacity: 1;
             pointer-events: auto;
         }
-
         .puzzle-btn.primary.active:hover {
             transform: scale(1.05);
             box-shadow: 0 12px 35px rgba(255,107,157,0.5);
         }
-
         .puzzle-btn.secondary {
             background: rgba(255,255,255,0.05);
             color: rgba(255,255,255,0.5);
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .puzzle-btn.secondary:hover {
             background: rgba(255,255,255,0.1);
             color: #fff;
@@ -462,33 +404,22 @@
             flex-direction: column;
             animation: fadeIn 0.5s ease;
         }
-
-        .celebration-overlay.active {
-            display: flex;
-        }
-
+        .celebration-overlay.active { display: flex; }
         @keyframes fadeIn {
             0% { opacity: 0; transform: scale(0.9); }
             100% { opacity: 1; transform: scale(1); }
         }
-
-        .celebration-overlay .big-emoji {
-            font-size: 5rem;
-            margin-bottom: 20px;
-        }
-
+        .celebration-overlay .big-emoji { font-size: 5rem; margin-bottom: 20px; }
         .celebration-overlay h2 {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
             color: #ff6b9d;
         }
-
         .celebration-overlay p {
             color: rgba(255,255,255,0.6);
             font-size: 1.1rem;
             margin-top: 10px;
         }
-
         .celebration-overlay .btn-continue {
             margin-top: 30px;
             padding: 14px 50px;
@@ -502,10 +433,7 @@
             transition: 0.4s;
             box-shadow: 0 8px 30px rgba(255,107,157,0.4);
         }
-
-        .celebration-overlay .btn-continue:hover {
-            transform: scale(1.05);
-        }
+        .celebration-overlay .btn-continue:hover { transform: scale(1.05); }
 
         /* ===== DESKTOP ===== */
         #desktop {
@@ -516,21 +444,16 @@
             position: relative;
             overflow: hidden;
         }
-
-        #desktop.active {
-            display: block;
-        }
-
+        #desktop.active { display: block; }
         .wallpaper {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(255,107,157,0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(107,157,255,0.1) 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0a, #1a0a1a);
+            background: radial-gradient(ellipse at 20% 50%, rgba(255,107,157,0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 50%, rgba(107,157,255,0.1) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0a0a, #1a0a1a);
             z-index: 0;
         }
 
@@ -543,7 +466,6 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-
         .falling-item img {
             width: 100%;
             height: 100%;
@@ -551,21 +473,11 @@
             border-radius: 12px;
             border: 2px solid rgba(255,255,255,0.2);
         }
-
         @keyframes fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg) scale(0.5);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-                transform: translateY(0) rotate(5deg) scale(1);
-            }
+            0% { transform: translateY(-100px) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateY(0) rotate(5deg) scale(1); }
             90% { opacity: 1; }
-            100% {
-                transform: translateY(110vh) rotate(720deg) scale(0.3);
-                opacity: 0;
-            }
+            100% { transform: translateY(110vh) rotate(720deg) scale(0.3); opacity: 0; }
         }
 
         /* ===== TASKBAR ===== */
@@ -575,7 +487,7 @@
             left: 0;
             width: 100%;
             height: 50px;
-            background: rgba(20, 20, 30, 0.95);
+            background: rgba(20,20,30,0.95);
             backdrop-filter: blur(20px);
             display: flex;
             align-items: center;
@@ -584,7 +496,6 @@
             z-index: 100;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
-
         .taskbar-start {
             display: flex;
             align-items: center;
@@ -597,11 +508,7 @@
             border-radius: 8px;
             transition: 0.3s;
         }
-
-        .taskbar-start:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
+        .taskbar-start:hover { background: rgba(255,255,255,0.05); }
         .taskbar-start .logo {
             width: 20px;
             height: 20px;
@@ -612,14 +519,12 @@
             justify-content: center;
             font-size: 0.7rem;
         }
-
         .taskbar-apps {
             display: flex;
             gap: 5px;
             flex: 1;
             justify-content: center;
         }
-
         .taskbar-app {
             padding: 5px 12px;
             background: rgba(255,255,255,0.05);
@@ -631,17 +536,11 @@
             font-family: 'Quicksand', sans-serif;
             border: none;
         }
-
-        .taskbar-app:hover {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-        }
-
+        .taskbar-app:hover { background: rgba(255,255,255,0.1); color: #fff; }
         .taskbar-app.active {
             background: rgba(255,107,157,0.2);
             color: #ff6b9d;
         }
-
         .taskbar-time {
             font-size: 0.8rem;
             color: rgba(255,255,255,0.7);
@@ -650,10 +549,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
-        .taskbar-time:hover {
-            background: rgba(255,255,255,0.05);
-        }
+        .taskbar-time:hover { background: rgba(255,255,255,0.05); }
 
         /* ===== DESKTOP ICONS ===== */
         .desktop-icons {
@@ -666,7 +562,6 @@
             z-index: 1;
             padding-top: 20px;
         }
-
         .desktop-icon {
             display: flex;
             flex-direction: column;
@@ -682,18 +577,15 @@
             color: #fff;
             text-align: center;
         }
-
         .desktop-icon:hover {
             background: rgba(255,255,255,0.05);
             border-color: rgba(255,255,255,0.1);
             transform: scale(1.05);
         }
-
         .desktop-icon .icon {
             font-size: 2.2rem;
             color: #ff6b9d;
         }
-
         .desktop-icon .label {
             font-size: 0.65rem;
             color: rgba(255,255,255,0.8);
@@ -702,11 +594,7 @@
             word-wrap: break-word;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
-
-        .desktop-icon.locked .icon {
-            color: #444;
-        }
-
+        .desktop-icon.locked .icon { color: #444; }
         .desktop-icon.locked .label::after {
             content: ' 🔒';
             font-size: 0.5rem;
@@ -719,7 +607,7 @@
             left: 10%;
             width: 80%;
             height: 75%;
-            background: rgba(20, 20, 30, 0.95);
+            background: rgba(20,20,30,0.95);
             backdrop-filter: blur(20px);
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.05);
@@ -730,16 +618,11 @@
             overflow: hidden;
             animation: windowOpen 0.3s ease;
         }
-
-        .window.open {
-            display: flex;
-        }
-
+        .window.open { display: flex; }
         @keyframes windowOpen {
             0% { opacity: 0; transform: scale(0.9); }
             100% { opacity: 1; transform: scale(1); }
         }
-
         .window-header {
             display: flex;
             align-items: center;
@@ -749,18 +632,15 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
             cursor: move;
         }
-
         .window-title {
             font-size: 0.8rem;
             color: rgba(255,255,255,0.8);
             font-weight: 600;
         }
-
         .window-controls {
             display: flex;
             gap: 8px;
         }
-
         .window-controls button {
             width: 12px;
             height: 12px;
@@ -769,14 +649,10 @@
             cursor: pointer;
             transition: 0.3s;
         }
-
         .window-controls .close { background: #ff5f57; }
         .window-controls .minimize { background: #ffbd2e; }
         .window-controls .maximize { background: #28c840; }
-
-        .window-controls button:hover {
-            transform: scale(1.1);
-        }
+        .window-controls button:hover { transform: scale(1.1); }
 
         .window-body {
             flex: 1;
@@ -785,7 +661,6 @@
             font-family: 'Quicksand', sans-serif;
             color: #fff;
         }
-
         .window-body::-webkit-scrollbar {
             width: 4px;
         }
@@ -797,7 +672,7 @@
             border-radius: 4px;
         }
 
-        /* ===== APP STYLES ===== */
+        /* ===== APP ===== */
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -1032,44 +907,6 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .window {
-                top: 5%;
-                left: 5%;
-                width: 90%;
-                height: 85%;
-            }
-            .desktop-icons {
-                grid-template-columns: repeat(auto-fill, 70px);
-                gap: 5px;
-            }
-            .desktop-icon .icon {
-                font-size: 1.8rem;
-            }
-            .desktop-icon .label {
-                font-size: 0.55rem;
-            }
-            .taskbar-apps {
-                gap: 3px;
-            }
-            .taskbar-app {
-                font-size: 0.6rem;
-                padding: 3px 8px;
-            }
-            .intro-title {
-                font-size: 2.5rem;
-            }
-            .intro-subtitle {
-                font-size: 0.9rem;
-            }
-            .boot-title {
-                font-size: 2rem;
-            }
-            .boot-progress {
-                width: 200px;
-            }
-            .puzzle-header h2 {
-                font-size: 2rem;
-            }
             .puzzle-layout {
                 flex-direction: column;
                 align-items: center;
@@ -1080,75 +917,32 @@
                 height: 280px;
                 padding: 6px;
             }
-            .puzzle-slot {
-                min-height: 75px;
-            }
+            .puzzle-slot { min-height: 75px; }
             .puzzle-pool {
                 width: 200px;
                 grid-template-columns: repeat(4, 1fr);
             }
-            .puzzle-pool .pool-piece {
-                min-height: 40px;
+            .puzzle-pool .pool-piece { min-height: 40px; }
+            .puzzle-info { max-width: 320px; padding: 8px 15px; font-size: 0.7rem; }
+            .intro-title { font-size: 2.5rem; }
+            .boot-title { font-size: 2rem; }
+            .boot-progress { width: 200px; }
+            .celebration-overlay h2 { font-size: 2.2rem; }
+            .window {
+                top: 5%;
+                left: 5%;
+                width: 90%;
+                height: 85%;
             }
-            .puzzle-info {
-                max-width: 320px;
-                padding: 8px 15px;
-                font-size: 0.7rem;
+            .desktop-icons {
+                grid-template-columns: repeat(auto-fill, 70px);
+                gap: 5px;
             }
-            .celebration-overlay h2 {
-                font-size: 2.2rem;
-            }
+            .desktop-icon .icon { font-size: 1.8rem; }
+            .desktop-icon .label { font-size: 0.55rem; }
         }
 
         @media (max-width: 480px) {
-            .window {
-                top: 2%;
-                left: 2%;
-                width: 96%;
-                height: 92%;
-                border-radius: 8px;
-            }
-            .desktop-icons {
-                grid-template-columns: repeat(auto-fill, 60px);
-                gap: 5px;
-                top: 10px;
-                left: 10px;
-            }
-            .desktop-icon {
-                padding: 10px 5px;
-            }
-            .desktop-icon .icon {
-                font-size: 1.5rem;
-            }
-            .taskbar {
-                height: 40px;
-                padding: 0 10px;
-            }
-            .taskbar-start {
-                font-size: 0.7rem;
-                padding: 3px 10px;
-            }
-            .taskbar-app {
-                font-size: 0.5rem;
-                padding: 2px 6px;
-            }
-            .taskbar-time {
-                font-size: 0.6rem;
-                padding: 3px 6px;
-            }
-            .window-body {
-                padding: 12px;
-            }
-            .intro-title {
-                font-size: 2rem;
-            }
-            .intro-btn {
-                padding: 12px 30px;
-                font-size: 0.9rem;
-            }
-            .puzzle-header h2 {
-                font-size: 1.6rem;
-            }
             .puzzle-grid {
                 width: 220px;
                 height: 220px;
@@ -1186,12 +980,35 @@
                 padding: 8px 20px;
                 font-size: 0.75rem;
             }
-            .celebration-overlay h2 {
-                font-size: 1.8rem;
+            .intro-title { font-size: 2rem; }
+            .intro-btn { padding: 12px 30px; font-size: 0.9rem; }
+            .celebration-overlay h2 { font-size: 1.8rem; }
+            .celebration-overlay .big-emoji { font-size: 3.5rem; }
+            .window {
+                top: 2%;
+                left: 2%;
+                width: 96%;
+                height: 92%;
+                border-radius: 8px;
             }
-            .celebration-overlay .big-emoji {
-                font-size: 3.5rem;
+            .desktop-icons {
+                grid-template-columns: repeat(auto-fill, 60px);
+                gap: 5px;
+                top: 10px;
+                left: 10px;
             }
+            .desktop-icon {
+                padding: 10px 5px;
+            }
+            .desktop-icon .icon { font-size: 1.5rem; }
+            .taskbar {
+                height: 40px;
+                padding: 0 10px;
+            }
+            .taskbar-start { font-size: 0.7rem; padding: 3px 10px; }
+            .taskbar-app { font-size: 0.5rem; padding: 2px 6px; }
+            .taskbar-time { font-size: 0.6rem; padding: 3px 6px; }
+            .window-body { padding: 12px; }
             .falling-item {
                 width: 40px !important;
                 height: 40px !important;
@@ -1201,7 +1018,7 @@
 </head>
 <body>
 
-    <!-- ===== INTRO SCREEN ===== -->
+    <!-- ===== INTRO ===== -->
     <div id="introScreen">
         <div id="introImage"></div>
         <div class="intro-overlay">
@@ -1213,7 +1030,7 @@
         </div>
     </div>
 
-    <!-- ===== BOOT SCREEN ===== -->
+    <!-- ===== BOOT ===== -->
     <div id="bootScreen">
         <div class="boot-title">✨ [NAMA DIA] OS ✨</div>
         <div class="boot-text">> Booting system...</div>
@@ -1228,7 +1045,7 @@
         </div>
     </div>
 
-    <!-- ===== PUZZLE SCREEN ===== -->
+    <!-- ===== PUZZLE ===== -->
     <div id="puzzleScreen">
         <div class="puzzle-header">
             <h2>🧩 Jigsaw Puzzle</h2>
@@ -1236,10 +1053,7 @@
         </div>
 
         <div class="puzzle-layout">
-            <!-- GRID -->
             <div class="puzzle-grid" id="puzzleGrid"></div>
-
-            <!-- PIECES POOL -->
             <div class="puzzle-pool" id="puzzlePool"></div>
         </div>
 
@@ -1271,46 +1085,18 @@
         <div class="wallpaper"></div>
 
         <div class="desktop-icons">
-            <div class="desktop-icon" data-app="memories">
-                <div class="icon">📸</div>
-                <div class="label">Memories</div>
-            </div>
-            <div class="desktop-icon" data-app="chat">
-                <div class="icon">💬</div>
-                <div class="label">Our Chat</div>
-            </div>
-            <div class="desktop-icon" data-app="song">
-                <div class="icon">🎵</div>
-                <div class="label">Your Song</div>
-            </div>
-            <div class="desktop-icon" data-app="why">
-                <div class="icon">❤️</div>
-                <div class="label">Why You</div>
-            </div>
-            <div class="desktop-icon" data-app="places">
-                <div class="icon">🗺️</div>
-                <div class="label">Our Places</div>
-            </div>
-            <div class="desktop-icon" data-app="game">
-                <div class="icon">🎮</div>
-                <div class="label">Mini Game</div>
-            </div>
-            <div class="desktop-icon locked" data-app="secret">
-                <div class="icon">🎁</div>
-                <div class="label">Secret File</div>
-            </div>
+            <div class="desktop-icon" data-app="memories"><div class="icon">📸</div><div class="label">Memories</div></div>
+            <div class="desktop-icon" data-app="chat"><div class="icon">💬</div><div class="label">Our Chat</div></div>
+            <div class="desktop-icon" data-app="song"><div class="icon">🎵</div><div class="label">Your Song</div></div>
+            <div class="desktop-icon" data-app="why"><div class="icon">❤️</div><div class="label">Why You</div></div>
+            <div class="desktop-icon" data-app="places"><div class="icon">🗺️</div><div class="label">Our Places</div></div>
+            <div class="desktop-icon" data-app="game"><div class="icon">🎮</div><div class="label">Mini Game</div></div>
+            <div class="desktop-icon locked" data-app="secret"><div class="icon">🎁</div><div class="label">Secret File</div></div>
         </div>
 
         <!-- WINDOWS -->
         <div class="window" id="window-memories">
-            <div class="window-header">
-                <span class="window-title">📸 Memories</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">📸 Memories</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="memory-grid">
                     <div class="memory-item"><span class="emoji">🌅</span><div class="title">Sunset pertama</div><div class="date">12 Jan 2025</div></div>
@@ -1324,14 +1110,7 @@
         </div>
 
         <div class="window" id="window-chat">
-            <div class="window-header">
-                <span class="window-title">💬 Our Chat</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">💬 Our Chat</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="chat-container">
                     <div class="chat-msg you"><div class="sender">Dia:</div>"Kamu tuh kenapa sih bisa se-cantik ini? 😤"</div>
@@ -1347,23 +1126,14 @@
         </div>
 
         <div class="window" id="window-song">
-            <div class="window-header">
-                <span class="window-title">🎵 Your Song</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">🎵 Your Song</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="song-player-app">
                     <div class="album-art">💿</div>
                     <div class="song-title">"Perfect"</div>
                     <div class="song-artist">— Ed Sheeran</div>
                     <div class="song-progress" id="songProgress"><div class="fill" id="songFill"></div></div>
-                    <div style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-bottom:10px;">
-                        <span id="currentTimeSong">0:00</span> / <span id="totalTimeSong">3:45</span>
-                    </div>
+                    <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-bottom:10px;"><span id="currentTimeSong">0:00</span> / <span id="totalTimeSong">3:45</span></div>
                     <div class="song-controls">
                         <button id="prevSongBtn"><i class="fas fa-step-backward"></i></button>
                         <button id="playSongBtn" style="font-size:2rem;"><i class="fas fa-play-circle"></i></button>
@@ -1375,14 +1145,7 @@
         </div>
 
         <div class="window" id="window-why">
-            <div class="window-header">
-                <span class="window-title">❤️ Why You</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">❤️ Why You</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="why-grid">
                     <div class="why-item"><span class="emoji">💝</span><div class="text">Kamu baik hati</div></div>
@@ -1398,14 +1161,7 @@
         </div>
 
         <div class="window" id="window-places">
-            <div class="window-header">
-                <span class="window-title">🗺️ Our Places</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">🗺️ Our Places</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="places-grid">
                     <div class="place-item"><span class="emoji">☕</span><div>Cafe favorit</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.4);">"Kopi susu kita"</div></div>
@@ -1417,14 +1173,7 @@
         </div>
 
         <div class="window" id="window-game">
-            <div class="window-header">
-                <span class="window-title">🎮 Mini Game</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">🎮 Mini Game</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="game-container">
                     <div class="game-score" id="gameScore">Score: 0/3</div>
@@ -1441,14 +1190,7 @@
         </div>
 
         <div class="window" id="window-secret">
-            <div class="window-header">
-                <span class="window-title">🎁 Secret File</span>
-                <div class="window-controls">
-                    <button class="minimize"></button>
-                    <button class="maximize"></button>
-                    <button class="close"></button>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title">🎁 Secret File</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
                 <div class="secret-container">
                     <span class="big-emoji">💌</span>
@@ -1461,9 +1203,7 @@
                         <br><br>
                         Terima kasih udah jadi dirimu yang luar biasa. Aku sayang kamu.
                         <br><br>
-                        <span style="font-family:'Great Vibes',cursive;font-size:2rem;color:#ff6b9d;">
-                            I love you! 💕
-                        </span>
+                        <span style="font-family:'Great Vibes',cursive;font-size:2rem;color:#ff6b9d;">I love you! 💕</span>
                     </div>
                 </div>
             </div>
@@ -1471,10 +1211,7 @@
 
         <!-- ===== TASKBAR ===== -->
         <div class="taskbar">
-            <div class="taskbar-start">
-                <div class="logo">❤️</div>
-                <span>Start</span>
-            </div>
+            <div class="taskbar-start"><div class="logo">❤️</div><span>Start</span></div>
             <div class="taskbar-apps" id="taskbarApps"></div>
             <div class="taskbar-time" id="taskbarTime">00:00</div>
         </div>
@@ -1482,7 +1219,7 @@
 
     <script>
         // ============================================
-        // ===== SCREEN NAVIGATION =====
+        // ===== NAVIGASI =====
         // ============================================
         const introScreen = document.getElementById('introScreen');
         const bootScreen = document.getElementById('bootScreen');
@@ -1492,8 +1229,37 @@
         const celebrationOverlay = document.getElementById('celebrationOverlay');
         const continueBtn = document.getElementById('continueBtn');
 
+        function goToBoot() {
+            introScreen.classList.add('hidden');
+            setTimeout(() => {
+                bootScreen.classList.add('active');
+                setTimeout(() => {
+                    bootScreen.classList.remove('active');
+                    puzzleScreen.classList.add('active');
+                    initPuzzle();
+                }, 5000);
+            }, 1500);
+        }
+
+        function goToDesktop() {
+            celebrationOverlay.classList.remove('active');
+            puzzleScreen.classList.remove('active');
+            if (timerInterval) clearInterval(timerInterval);
+            desktop.classList.add('active');
+            setTimeout(startFallingContent, 500);
+        }
+
+        startBtn.addEventListener('click', goToBoot);
+        continueBtn.addEventListener('click', goToDesktop);
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === 'Escape') && !introScreen.classList.contains('hidden')) {
+                goToBoot();
+            }
+        });
+
         // ============================================
-        // ===== JIGSAW PUZZLE LOGIC =====
+        // ===== PUZZLE JIGSAW =====
         // ============================================
         const puzzleGrid = document.getElementById('puzzleGrid');
         const puzzlePool = document.getElementById('puzzlePool');
@@ -1502,19 +1268,16 @@
         const shuffleBtn = document.getElementById('shuffleBtn');
         const puzzleCompleteBtn = document.getElementById('puzzleCompleteBtn');
 
-        const SIZE = 3;
-        const TOTAL_PIECES = 9;
-
+        const TOTAL = 9;
         let moves = 0;
         let timerSeconds = 0;
         let timerInterval = null;
-        let isPuzzleComplete = false;
+        let isComplete = false;
 
-        // State: array 9 elemen, null = kosong, angka = index piece (0-8)
-        let gridState = Array(TOTAL_PIECES).fill(null);
+        // State: grid[0..8] = null atau index piece (0..8)
+        let gridState = Array(TOTAL).fill(null);
         let poolPieces = [];
 
-        // ===== SHUFFLE =====
         function shuffleArray(arr) {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -1523,44 +1286,33 @@
             return arr;
         }
 
-        // ===== INIT PUZZLE =====
         function initPuzzle() {
-            // Reset state
-            gridState = Array(TOTAL_PIECES).fill(null);
+            gridState = Array(TOTAL).fill(null);
             poolPieces = [];
             moves = 0;
-            isPuzzleComplete = false;
+            isComplete = false;
             puzzleCompleteBtn.classList.remove('active');
             celebrationOverlay.classList.remove('active');
 
-            // Buat daftar piece 0-8
             let pieces = [];
-            for (let i = 0; i < TOTAL_PIECES; i++) pieces.push(i);
-
-            // Acak
+            for (let i = 0; i < TOTAL; i++) pieces.push(i);
             pieces = shuffleArray(pieces);
 
-            // Taruh 4-5 piece random di grid, sisanya di pool
-            const gridCount = Math.floor(Math.random() * 2) + 4; // 4-5 piece di grid
+            // Taruh 4-5 piece di grid
+            const gridCount = Math.floor(Math.random() * 2) + 4;
             for (let i = 0; i < gridCount && pieces.length > 0; i++) {
                 const idx = Math.floor(Math.random() * pieces.length);
                 const piece = pieces.splice(idx, 1)[0];
-                // Taruh di slot random yang kosong
                 let emptySlot = gridState.indexOf(null);
                 if (emptySlot === -1) break;
                 gridState[emptySlot] = piece;
             }
 
-            // Sisanya masuk pool
-            poolPieces = pieces;
-
-            // Shuffle pool
-            poolPieces = shuffleArray(poolPieces);
+            poolPieces = shuffleArray(pieces);
 
             renderPuzzle();
             updateMoves();
 
-            // Timer
             if (timerInterval) clearInterval(timerInterval);
             timerSeconds = 0;
             timerDisplay.textContent = '00:00';
@@ -1572,31 +1324,28 @@
             }, 1000);
         }
 
-        // ===== RENDER PUZZLE =====
         function renderPuzzle() {
             // Render grid
             puzzleGrid.innerHTML = '';
-            for (let i = 0; i < TOTAL_PIECES; i++) {
+            for (let i = 0; i < TOTAL; i++) {
                 const slot = document.createElement('div');
                 slot.className = 'puzzle-slot';
                 slot.dataset.index = i;
 
                 if (gridState[i] !== null) {
                     const pieceIdx = gridState[i];
-                    const row = Math.floor(pieceIdx / SIZE);
-                    const col = pieceIdx % SIZE;
+                    const row = Math.floor(pieceIdx / 3);
+                    const col = pieceIdx % 3;
                     const bgSize = 300;
-                    const xPos = (col / (SIZE - 1)) * 100;
-                    const yPos = (row / (SIZE - 1)) * 100;
+                    const xPos = (col / 2) * 100;
+                    const yPos = (row / 2) * 100;
 
                     const piece = document.createElement('div');
-                    piece.className = 'puzzle-piece placed';
+                    piece.className = 'puzzle-piece';
                     piece.style.backgroundImage = "url('puzzle.jpeg')";
-                    piece.style.backgroundSize = `${bgSize}% ${bgSize}%`;
-                    piece.style.backgroundPosition = `${xPos}% ${yPos}%`;
+                    piece.style.backgroundSize = bgSize + '% ' + bgSize + '%';
+                    piece.style.backgroundPosition = xPos + '% ' + yPos + '%';
                     piece.style.backgroundRepeat = 'no-repeat';
-                    piece.dataset.piece = pieceIdx;
-                    piece.draggable = false;
 
                     const label = document.createElement('span');
                     label.className = 'piece-label';
@@ -1606,9 +1355,7 @@
                     slot.appendChild(piece);
                     slot.classList.add('filled');
                 } else {
-                    // Slot kosong (drop zone)
-                    slot.classList.remove('filled');
-                    // Event listeners untuk drag & drop
+                    // Drop zone
                     slot.addEventListener('dragover', (e) => {
                         e.preventDefault();
                         slot.classList.add('drag-over');
@@ -1621,10 +1368,8 @@
                         slot.classList.remove('drag-over');
                         const pieceIdx = parseInt(e.dataTransfer.getData('text/plain'));
                         if (!isNaN(pieceIdx) && gridState[i] === null) {
-                            // Cek apakah piece ini ada di pool
                             const poolIndex = poolPieces.indexOf(pieceIdx);
                             if (poolIndex !== -1) {
-                                // Pindahkan dari pool ke grid
                                 poolPieces.splice(poolIndex, 1);
                                 gridState[i] = pieceIdx;
                                 moves++;
@@ -1647,23 +1392,23 @@
             // Render pool
             puzzlePool.innerHTML = '';
             if (poolPieces.length === 0) {
-                const emptyMsg = document.createElement('div');
-                emptyMsg.style.cssText = 'grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.2);font-size:0.8rem;padding:20px;';
-                emptyMsg.textContent = '✨ Semua potongan sudah terpasang!';
-                puzzlePool.appendChild(emptyMsg);
+                const msg = document.createElement('div');
+                msg.style.cssText = 'grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.2);font-size:0.8rem;padding:20px;';
+                msg.textContent = '✨ Semua sudah terpasang!';
+                puzzlePool.appendChild(msg);
             } else {
                 poolPieces.forEach((pieceIdx) => {
-                    const row = Math.floor(pieceIdx / SIZE);
-                    const col = pieceIdx % SIZE;
+                    const row = Math.floor(pieceIdx / 3);
+                    const col = pieceIdx % 3;
                     const bgSize = 300;
-                    const xPos = (col / (SIZE - 1)) * 100;
-                    const yPos = (row / (SIZE - 1)) * 100;
+                    const xPos = (col / 2) * 100;
+                    const yPos = (row / 2) * 100;
 
                     const div = document.createElement('div');
                     div.className = 'pool-piece';
                     div.style.backgroundImage = "url('puzzle.jpeg')";
-                    div.style.backgroundSize = `${bgSize}% ${bgSize}%`;
-                    div.style.backgroundPosition = `${xPos}% ${yPos}%`;
+                    div.style.backgroundSize = bgSize + '% ' + bgSize + '%';
+                    div.style.backgroundPosition = xPos + '% ' + yPos + '%';
                     div.style.backgroundRepeat = 'no-repeat';
                     div.draggable = true;
                     div.dataset.piece = pieceIdx;
@@ -1686,17 +1431,14 @@
             }
         }
 
-        // ===== UPDATE MOVES =====
         function updateMoves() {
             moveCountEl.textContent = moves;
         }
 
-        // ===== CHECK WIN =====
         function checkWin() {
-            // Cek apakah semua slot terisi dengan urutan yang benar (0,1,2,3,4,5,6,7,8)
-            const isComplete = gridState.every((val, idx) => val === idx);
-            if (isComplete && poolPieces.length === 0) {
-                isPuzzleComplete = true;
+            const win = gridState.every((val, idx) => val === idx);
+            if (win && poolPieces.length === 0) {
+                isComplete = true;
                 if (timerInterval) clearInterval(timerInterval);
                 puzzleCompleteBtn.classList.add('active');
                 celebrationOverlay.classList.add('active');
@@ -1704,7 +1446,6 @@
             }
         }
 
-        // ===== CELEBRATION =====
         function createCelebration() {
             const emojis = ['🎉', '✨', '💖', '🎊', '❤️', '⭐', '🌈', '💕', '🧩', '🎁'];
             for (let i = 0; i < 50; i++) {
@@ -1727,93 +1468,34 @@
             }
         }
 
-        // ============================================
-        // ===== NAVIGATION =====
-        // ============================================
-        function goToBoot() {
-            introScreen.classList.add('hidden');
-            setTimeout(() => {
-                bootScreen.classList.add('active');
-                setTimeout(() => {
-                    bootScreen.classList.remove('active');
-                    puzzleScreen.classList.add('active');
-                    initPuzzle();
-                }, 5000);
-            }, 1500);
-        }
-
-        function goToDesktop() {
-            celebrationOverlay.classList.remove('active');
-            puzzleScreen.classList.remove('active');
-            if (timerInterval) clearInterval(timerInterval);
-            desktop.classList.add('active');
-            setTimeout(() => {
-                startFallingContent();
-            }, 500);
-        }
-
-        // ===== EVENT LISTENERS =====
-        startBtn.addEventListener('click', goToBoot);
-        continueBtn.addEventListener('click', goToDesktop);
         shuffleBtn.addEventListener('click', initPuzzle);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !introScreen.classList.contains('hidden')) {
-                goToBoot();
-            }
-            if (e.key === 'Escape' && !introScreen.classList.contains('hidden')) {
-                goToBoot();
-            }
-        });
 
         // ============================================
         // ===== FALLING CONTENT =====
         // ============================================
         let fallingInterval;
 
-        const photoListFalling = [
-            'images/foto1.jpg',
-            'images/foto2.jpg',
-            'images/foto3.jpg',
-            'images/foto4.jpg',
-            'images/foto5.jpg',
-        ];
-
-        const ITEM_SIZE_MIN = 50;
-        const ITEM_SIZE_MAX = 100;
-
         function startFallingContent() {
             if (fallingInterval) clearInterval(fallingInterval);
             fallingInterval = setInterval(() => {
-                createFallingItem();
+                const item = document.createElement('div');
+                item.className = 'falling-item';
+                const size = Math.random() * 50 + 50;
+                item.style.width = size + 'px';
+                item.style.height = size + 'px';
+                item.style.left = Math.random() * 90 + 5 + '%';
+                const duration = Math.random() * 5 + 5;
+                item.style.animationDuration = duration + 's';
+                item.style.animationDelay = Math.random() * 0.5 + 's';
+
+                const img = document.createElement('img');
+                img.src = 'images/foto' + (Math.floor(Math.random() * 5) + 1) + '.jpg';
+                img.alt = 'Memory';
+                img.loading = 'lazy';
+                item.appendChild(img);
+                document.body.appendChild(item);
+                setTimeout(() => item.remove(), duration * 1000 + 1000);
             }, Math.random() * 400 + 400);
-        }
-
-        function createFallingItem() {
-            const item = document.createElement('div');
-            item.className = 'falling-item';
-
-            const size = Math.random() * (ITEM_SIZE_MAX - ITEM_SIZE_MIN) + ITEM_SIZE_MIN;
-            item.style.width = size + 'px';
-            item.style.height = size + 'px';
-            item.style.left = Math.random() * 90 + 5 + '%';
-
-            const duration = Math.random() * 5 + 5;
-            item.style.animationDuration = duration + 's';
-            item.style.animationDelay = Math.random() * 0.5 + 's';
-
-            const img = document.createElement('img');
-            const randomPhoto = photoListFalling[Math.floor(Math.random() * photoListFalling.length)];
-            img.src = randomPhoto;
-            img.alt = 'Memory';
-            img.loading = 'lazy';
-            item.appendChild(img);
-
-            document.body.appendChild(item);
-
-            setTimeout(() => {
-                if (item.parentNode) item.remove();
-            }, duration * 1000 + 1000);
         }
 
         // ============================================
@@ -1821,9 +1503,8 @@
         // ============================================
         function updateTime() {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('taskbarTime').textContent = `${hours}:${minutes}`;
+            document.getElementById('taskbarTime').textContent =
+                String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
         }
         updateTime();
         setInterval(updateTime, 10000);
@@ -1835,81 +1516,69 @@
         let windowZIndex = 50;
 
         function openWindow(appId) {
-            const window = document.getElementById(`window-${appId}`);
-            if (!window) return;
-
-            if (window.classList.contains('open')) {
-                window.style.zIndex = ++windowZIndex;
+            const win = document.getElementById('window-' + appId);
+            if (!win) return;
+            if (win.classList.contains('open')) {
+                win.style.zIndex = ++windowZIndex;
                 return;
             }
-
-            window.classList.add('open');
-            window.style.zIndex = ++windowZIndex;
+            win.classList.add('open');
+            win.style.zIndex = ++windowZIndex;
             openWindows.push(appId);
 
             const taskbarApps = document.getElementById('taskbarApps');
-            const appBtn = document.createElement('button');
-            appBtn.className = 'taskbar-app active';
-            appBtn.dataset.app = appId;
-            appBtn.textContent = document.querySelector(`[data-app="${appId}"] .label`).textContent;
-            appBtn.onclick = () => {
-                const win = document.getElementById(`window-${appId}`);
-                if (win) {
-                    win.style.zIndex = ++windowZIndex;
-                    win.classList.toggle('open');
-                    appBtn.classList.toggle('active');
+            const btn = document.createElement('button');
+            btn.className = 'taskbar-app active';
+            btn.dataset.app = appId;
+            btn.textContent = document.querySelector('[data-app="' + appId + '"] .label').textContent;
+            btn.onclick = () => {
+                const w = document.getElementById('window-' + appId);
+                if (w) {
+                    w.style.zIndex = ++windowZIndex;
+                    w.classList.toggle('open');
+                    btn.classList.toggle('active');
                 }
             };
-            taskbarApps.appendChild(appBtn);
+            taskbarApps.appendChild(btn);
 
-            const closeBtn = window.querySelector('.window-controls .close');
-            closeBtn.onclick = () => closeWindow(appId);
-
-            const minBtn = window.querySelector('.window-controls .minimize');
-            minBtn.onclick = () => {
-                window.classList.remove('open');
-                const btn = taskbarApps.querySelector(`[data-app="${appId}"]`);
-                if (btn) btn.classList.remove('active');
+            win.querySelector('.window-controls .close').onclick = () => closeWindow(appId);
+            win.querySelector('.window-controls .minimize').onclick = () => {
+                win.classList.remove('open');
+                const b = taskbarApps.querySelector('[data-app="' + appId + '"]');
+                if (b) b.classList.remove('active');
             };
-
-            makeDraggable(window);
+            makeDraggable(win);
         }
 
         function closeWindow(appId) {
-            const window = document.getElementById(`window-${appId}`);
-            if (window) window.classList.remove('open');
+            const win = document.getElementById('window-' + appId);
+            if (win) win.classList.remove('open');
             openWindows = openWindows.filter(id => id !== appId);
-            const btn = document.getElementById('taskbarApps').querySelector(`[data-app="${appId}"]`);
+            const btn = document.getElementById('taskbarApps').querySelector('[data-app="' + appId + '"]');
             if (btn) btn.remove();
         }
 
-        function makeDraggable(window) {
-            const header = window.querySelector('.window-header');
-            let isDragging = false;
-            let offsetX, offsetY;
-
+        function makeDraggable(win) {
+            const header = win.querySelector('.window-header');
+            let dragging = false,
+                offsetX, offsetY;
             header.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                offsetX = e.clientX - window.offsetLeft;
-                offsetY = e.clientY - window.offsetTop;
-                window.style.cursor = 'grabbing';
+                dragging = true;
+                offsetX = e.clientX - win.offsetLeft;
+                offsetY = e.clientY - win.offsetTop;
+                win.style.cursor = 'grabbing';
             });
-
             document.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                window.style.left = (e.clientX - offsetX) + 'px';
-                window.style.top = (e.clientY - offsetY) + 'px';
+                if (!dragging) return;
+                win.style.left = (e.clientX - offsetX) + 'px';
+                win.style.top = (e.clientY - offsetY) + 'px';
             });
-
             document.addEventListener('mouseup', () => {
-                isDragging = false;
-                window.style.cursor = 'default';
+                dragging = false;
+                win.style.cursor = 'default';
             });
         }
 
-        // ============================================
-        // ===== DESKTOP ICON CLICKS =====
-        // ============================================
         document.querySelectorAll('.desktop-icon').forEach(icon => {
             icon.addEventListener('dblclick', () => {
                 const app = icon.dataset.app;
@@ -1924,6 +1593,12 @@
                     openWindow(app);
                 }
             });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && openWindows.length > 0) {
+                closeWindow(openWindows[openWindows.length - 1]);
+            }
         });
 
         // ============================================
@@ -1955,47 +1630,38 @@
                 document.querySelector('[data-app="secret"]').classList.remove('locked');
                 return;
             }
-
             const q = questions[currentQuestion];
             document.getElementById('gameQuestion').textContent = q.question;
-            const optionsContainer = document.getElementById('gameOptions');
-            optionsContainer.innerHTML = '';
-            q.options.forEach((opt, index) => {
+            const container = document.getElementById('gameOptions');
+            container.innerHTML = '';
+            q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'game-option';
                 btn.textContent = opt;
-                btn.dataset.index = index;
-                btn.onclick = () => checkAnswer(btn, index, q.correct);
-                optionsContainer.appendChild(btn);
+                btn.dataset.index = idx;
+                btn.onclick = () => checkAnswer(btn, idx, q.correct);
+                container.appendChild(btn);
             });
         }
 
         function checkAnswer(btn, selected, correct) {
             const allBtns = document.querySelectorAll('.game-option');
             allBtns.forEach(b => b.style.pointerEvents = 'none');
-
             if (selected === correct) {
                 btn.classList.add('correct');
                 gameScore++;
-                document.getElementById('gameScore').textContent = `Score: ${gameScore}/${questions.length}`;
-                setTimeout(() => {
-                    currentQuestion++;
-                    loadQuestion();
-                }, 800);
+                document.getElementById('gameScore').textContent = 'Score: ' + gameScore + '/' + questions.length;
+                setTimeout(() => { currentQuestion++;
+                    loadQuestion(); }, 800);
             } else {
                 btn.classList.add('wrong');
                 allBtns.forEach(b => {
-                    if (parseInt(b.dataset.index) === correct) {
-                        b.classList.add('correct');
-                    }
+                    if (parseInt(b.dataset.index) === correct) b.classList.add('correct');
                 });
-                setTimeout(() => {
-                    currentQuestion++;
-                    loadQuestion();
-                }, 1200);
+                setTimeout(() => { currentQuestion++;
+                    loadQuestion(); }, 1200);
             }
         }
-
         loadQuestion();
 
         // ============================================
@@ -2011,9 +1677,7 @@
 
         audio.addEventListener('loadedmetadata', () => {
             const total = audio.duration;
-            const mins = Math.floor(total / 60);
-            const secs = Math.floor(total % 60);
-            totalTimeEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+            totalTimeEl.textContent = Math.floor(total / 60) + ':' + String(Math.floor(total % 60)).padStart(2, '0');
         });
 
         playBtn.addEventListener('click', () => {
@@ -2031,12 +1695,8 @@
         audio.addEventListener('timeupdate', () => {
             const current = audio.currentTime;
             const total = audio.duration;
-            const percentage = (current / total) * 100;
-            progressFill.style.width = percentage + '%';
-
-            const mins = Math.floor(current / 60);
-            const secs = Math.floor(current % 60);
-            currentTimeEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+            progressFill.style.width = (current / total) * 100 + '%';
+            currentTimeEl.textContent = Math.floor(current / 60) + ':' + String(Math.floor(current % 60)).padStart(2, '0');
         });
 
         audio.addEventListener('ended', () => {
@@ -2048,41 +1708,13 @@
 
         progressBarSong.addEventListener('click', (e) => {
             const rect = progressBarSong.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const width = rect.width;
-            const percentage = clickX / width;
-            audio.currentTime = percentage * audio.duration;
-        });
-
-        // ============================================
-        // ===== KEYBOARD SHORTCUTS =====
-        // ============================================
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && openWindows.length > 0) {
-                const lastApp = openWindows[openWindows.length - 1];
-                closeWindow(lastApp);
-            }
-        });
-
-        // ============================================
-        // ===== RESPONSIVE =====
-        // ============================================
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth < 768 && desktop.classList.contains('active')) {
-                const isWindow = e.target.closest('.window');
-                const isIcon = e.target.closest('.desktop-icon');
-                const isTaskbar = e.target.closest('.taskbar');
-                if (!isWindow && !isIcon && !isTaskbar) {
-                    openWindows.forEach(app => closeWindow(app));
-                }
-            }
+            audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
         });
 
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
         console.log('🧩 Jigsaw Puzzle mode: ON');
-        console.log('📸 Intro foto: intro.jpeg');
-        console.log('🧩 Puzzle foto: puzzle.jpeg');
+        console.log('📸 Intro: intro.jpeg | Puzzle: puzzle.jpeg');
     </script>
 
 </body>
