@@ -23,7 +23,7 @@
             width: 100vw;
         }
 
-        /* ===== INTRO VIDEO ===== */
+        /* ===== INTRO FOTO ===== */
         #introScreen {
             position: fixed;
             top: 0;
@@ -44,10 +44,10 @@
             pointer-events: none;
         }
 
-        #introVideo {
+        #introImage {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: url('intro.jpeg') center/cover no-repeat;
             position: absolute;
             top: 0;
             left: 0;
@@ -59,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.35);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -131,64 +131,6 @@
             border-color: rgba(255,255,255,0.3);
         }
 
-        .intro-progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: rgba(255,255,255,0.1);
-            z-index: 3;
-        }
-
-        .intro-progress .bar {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b9d, #ffb6c1);
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-
-        /* Tombol sound toggle */
-        .sound-toggle {
-            position: absolute;
-            bottom: 80px;
-            right: 30px;
-            z-index: 3;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .sound-toggle:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.1);
-        }
-
-        .tap-hint {
-            position: absolute;
-            bottom: 140px;
-            color: rgba(255,255,255,0.3);
-            font-size: 0.7rem;
-            z-index: 3;
-            font-family: 'Space Mono', monospace;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
         @keyframes introPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.03); opacity: 0.9; }
@@ -212,10 +154,6 @@
 
         #bootScreen.active {
             display: flex;
-        }
-
-        #bootScreen.hidden {
-            display: none;
         }
 
         .boot-text {
@@ -286,7 +224,6 @@
             display: block;
         }
 
-        /* Wallpaper */
         .wallpaper {
             position: absolute;
             top: 0;
@@ -318,14 +255,6 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
-        .falling-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-
         @keyframes fall {
             0% {
                 transform: translateY(-100px) rotate(0deg) scale(0.5);
@@ -335,9 +264,7 @@
                 opacity: 1;
                 transform: translateY(0) rotate(5deg) scale(1);
             }
-            90% {
-                opacity: 1;
-            }
+            90% { opacity: 1; }
             100% {
                 transform: translateY(110vh) rotate(720deg) scale(0.3);
                 opacity: 0;
@@ -853,76 +780,49 @@
                 width: 90%;
                 height: 85%;
             }
-
             .desktop-icons {
                 grid-template-columns: repeat(auto-fill, 70px);
                 gap: 5px;
             }
-
             .desktop-icon .icon {
                 font-size: 1.8rem;
             }
-
             .desktop-icon .label {
                 font-size: 0.55rem;
             }
-
             .taskbar-apps {
                 gap: 3px;
             }
-
             .taskbar-app {
                 font-size: 0.6rem;
                 padding: 3px 8px;
             }
-
             .memory-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
-
             .game-options {
                 grid-template-columns: 1fr;
             }
-
             .why-grid {
                 grid-template-columns: 1fr;
             }
-
             .places-grid {
                 grid-template-columns: 1fr;
             }
-
             .intro-title {
                 font-size: 2.5rem;
             }
-
             .intro-subtitle {
                 font-size: 0.9rem;
             }
-
             .boot-title {
                 font-size: 2rem;
             }
-
             .boot-progress {
                 width: 200px;
             }
-
             .secret-container .secret-message {
                 font-size: 1.8rem;
-            }
-
-            .sound-toggle {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
-                bottom: 70px;
-                right: 20px;
-            }
-
-            .tap-hint {
-                bottom: 120px;
-                font-size: 0.6rem;
             }
         }
 
@@ -934,131 +834,85 @@
                 height: 92%;
                 border-radius: 8px;
             }
-
             .desktop-icons {
                 grid-template-columns: repeat(auto-fill, 60px);
                 gap: 5px;
                 top: 10px;
                 left: 10px;
             }
-
             .desktop-icon {
                 padding: 10px 5px;
             }
-
             .desktop-icon .icon {
                 font-size: 1.5rem;
             }
-
             .taskbar {
                 height: 40px;
                 padding: 0 10px;
             }
-
             .taskbar-start {
                 font-size: 0.7rem;
                 padding: 3px 10px;
             }
-
             .taskbar-app {
                 font-size: 0.5rem;
                 padding: 2px 6px;
             }
-
             .taskbar-time {
                 font-size: 0.6rem;
                 padding: 3px 6px;
             }
-
             .window-body {
                 padding: 12px;
             }
-
             .memory-grid {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
                 gap: 8px;
             }
-
             .memory-item {
                 padding: 12px;
             }
-
             .memory-item .emoji {
                 font-size: 2rem;
             }
-
             .intro-title {
                 font-size: 2rem;
             }
-
             .intro-btn {
                 padding: 12px 30px;
                 font-size: 0.9rem;
             }
-
             .falling-item {
                 width: 40px !important;
                 height: 40px !important;
-            }
-
-            .sound-toggle {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-                bottom: 60px;
-                right: 15px;
-            }
-
-            .tap-hint {
-                bottom: 100px;
-                font-size: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== INTRO VIDEO SCREEN ===== -->
+    <!-- ===== INTRO FOTO ===== -->
     <div id="introScreen">
-        <!-- VIDEO INTRO (DENGAN SUARA) -->
-        <video id="introVideo" autoplay loop playsinline>
-            <source src="intro.jpeg" type="photo/jpeg" />
-            <p>Videomu gak bisa diputar :( coba refresh</p>
-        </video>
+        <!-- FOTO BACKGROUND -->
+        <div id="introImage"></div>
         
         <!-- OVERLAY -->
         <div class="intro-overlay">
             <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
+            <div class="intro-subtitle">A FILM BY ANISA </div>
             <button class="intro-btn" id="startBtn">
                 <i class="fas fa-play"></i> Mulai Petualangan
             </button>
         </div>
 
-        <!-- TOMBOL SKIP -->
         <div class="intro-skip" id="skipBtn">
             Skip <i class="fas fa-forward"></i>
-        </div>
-
-        <!-- PROGRESS BAR -->
-        <div class="intro-progress">
-            <div class="bar" id="introProgressBar"></div>
-        </div>
-
-        <!-- TOMBOL MUTE/UNMUTE -->
-        <div class="sound-toggle" id="soundToggle">
-            <i class="fas fa-volume-up"></i>
-        </div>
-
-        <!-- HINT TAP LAYAR -->
-        <div class="tap-hint" style="display:none;">
-            🎵 Tap layar untuk mendengar suara
         </div>
     </div>
 
     <!-- ===== BOOT SCREEN ===== -->
     <div id="bootScreen">
-        <div class="boot-title">✨ [NAMA DIA] OS ✨</div>
+        <div class="boot-title">✨ [] OS ✨radel virdiana</div>
         <div class="boot-text">> Booting system...</div>
         <div class="boot-text">> Loading memories...</div>
         <div class="boot-text">> Loading stupid jokes...</div>
@@ -1388,43 +1242,22 @@
     </div>
 
     <script>
-        // ===== INTRO VIDEO LOGIC =====
+        // ===== INTRO FOTO LOGIC =====
         const introScreen = document.getElementById('introScreen');
         const bootScreen = document.getElementById('bootScreen');
         const desktop = document.getElementById('desktop');
-        const introVideo = document.getElementById('introVideo');
         const startBtn = document.getElementById('startBtn');
         const skipBtn = document.getElementById('skipBtn');
-        const progressBar = document.getElementById('introProgressBar');
-
-        // ===== SOUND TOGGLE =====
-        let isMuted = false;
-        const soundToggle = document.getElementById('soundToggle');
-
-        soundToggle.addEventListener('click', function() {
-            isMuted = !isMuted;
-            introVideo.muted = isMuted;
-            this.innerHTML = isMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
-        });
 
         // ===== FUNCTION GO TO BOOT =====
         function goToBoot() {
-            // === PAUSE VIDEO INTRO ===
-            introVideo.pause();
-            
-            // === SEMBUNYIKAN INTRO ===
             introScreen.classList.add('hidden');
 
-            // === TAMPILKAN BOOT SCREEN ===
             setTimeout(() => {
                 bootScreen.classList.add('active');
-                
-                // === TAMPILKAN DESKTOP ===
                 setTimeout(() => {
                     bootScreen.classList.remove('active');
                     desktop.classList.add('active');
-                    
-                    // === MULAI FALLING CONTENT ===
                     setTimeout(() => {
                         startFallingContent();
                     }, 1000);
@@ -1436,14 +1269,6 @@
         startBtn.addEventListener('click', goToBoot);
         skipBtn.addEventListener('click', goToBoot);
 
-        // ===== PROGRESS BAR VIDEO =====
-        introVideo.addEventListener('timeupdate', () => {
-            if (introVideo.duration) {
-                const percentage = (introVideo.currentTime / introVideo.duration) * 100;
-                progressBar.style.width = percentage + '%';
-            }
-        });
-
         // ===== KEYBOARD SHORTCUT =====
         document.addEventListener('keydown', (e) => {
             if ((e.key === 'Enter' || e.key === ' ') && !introScreen.classList.contains('hidden')) {
@@ -1454,10 +1279,8 @@
         // ===== FALLING CONTENT =====
         let fallingInterval;
 
-        // ====== KONFIGURASI ======
         const FALLING_MODE = 'photo';
-
-        const photoList = [
+        const photoListFalling = [
             'images/foto1.jpg',
             'images/foto2.jpg',
             'images/foto3.jpg',
@@ -1465,17 +1288,11 @@
             'images/foto5.jpg',
         ];
 
-        const videoList = [
-            'videos/video1.mp4',
-            'videos/video2.mp4',
-        ];
-
         const ITEM_SIZE_MIN = 50;
         const ITEM_SIZE_MAX = 100;
 
         function startFallingContent() {
             if (fallingInterval) clearInterval(fallingInterval);
-            
             fallingInterval = setInterval(() => {
                 createFallingItem();
             }, Math.random() * 400 + 400);
@@ -1494,23 +1311,12 @@
             item.style.animationDuration = duration + 's';
             item.style.animationDelay = Math.random() * 0.5 + 's';
 
-            if (FALLING_MODE === 'photo') {
-                const img = document.createElement('img');
-                const randomPhoto = photoList[Math.floor(Math.random() * photoList.length)];
-                img.src = randomPhoto;
-                img.alt = 'Memory';
-                img.loading = 'lazy';
-                item.appendChild(img);
-            } else {
-                const video = document.createElement('video');
-                const randomVideo = videoList[Math.floor(Math.random() * videoList.length)];
-                video.src = randomVideo;
-                video.muted = true;
-                video.autoplay = true;
-                video.loop = true;
-                video.playsinline = true;
-                item.appendChild(video);
-            }
+            const img = document.createElement('img');
+            const randomPhoto = photoListFalling[Math.floor(Math.random() * photoListFalling.length)];
+            img.src = randomPhoto;
+            img.alt = 'Memory';
+            img.loading = 'lazy';
+            item.appendChild(img);
 
             document.body.appendChild(item);
 
@@ -1767,13 +1573,9 @@
             }
         });
 
-        // ===== CONSOLE LOG =====
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
-        console.log('📸 Mode:', FALLING_MODE);
-        console.log('📷 Jumlah foto:', photoList.length);
-        console.log('🎬 Jumlah video:', videoList.length);
-        console.log('🎵 Sound mode: ON');
+        console.log('📸 Intro foto: intro.jpeg');
     </script>
 
 </body>
