@@ -225,16 +225,12 @@
             background: rgba(255,255,255,0.1);
             transition: 0.3s;
         }
-        .game-progress .dot.done {
-            background: #00ff88;
-        }
+        .game-progress .dot.done { background: #00ff88; }
         .game-progress .dot.active {
             background: #ff6b9d;
             box-shadow: 0 0 20px rgba(255,107,157,0.4);
         }
-        .game-progress .dot.wrong {
-            background: #ff5757;
-        }
+        .game-progress .dot.wrong { background: #ff5757; }
 
         /* ===== FOTO ===== */
         .game-photo {
@@ -247,14 +243,12 @@
             background: #1a1a1a;
             border: 1px solid rgba(255,255,255,0.05);
         }
-
         .game-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: filter 1s ease, opacity 0.8s ease;
         }
-
         .game-photo .blur-overlay {
             position: absolute;
             top: 0;
@@ -270,17 +264,14 @@
             justify-content: center;
             z-index: 2;
         }
-
         .game-photo .blur-overlay .icon {
             font-size: 3rem;
             opacity: 0.3;
         }
-
         .game-photo .blur-overlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
-
         .game-photo .reveal-label {
             position: absolute;
             bottom: 0;
@@ -296,13 +287,11 @@
             transition: all 0.6s ease;
             z-index: 3;
         }
-
         .game-photo .reveal-label.show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* ===== QUESTION ===== */
         .game-question {
             font-family: 'Patrick Hand', cursive;
             font-size: 1.2rem;
@@ -310,17 +299,13 @@
             text-align: center;
             margin-bottom: 15px;
         }
-        .game-question span {
-            color: #ff6b9d;
-        }
+        .game-question span { color: #ff6b9d; }
 
-        /* ===== OPTIONS ===== */
         .game-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
         .game-option {
             padding: 14px 12px;
             border: 2px solid rgba(255,255,255,0.08);
@@ -334,32 +319,27 @@
             transition: all 0.3s ease;
             text-align: center;
         }
-
         .game-option:hover:not(.disabled) {
             border-color: #ff6b9d;
             background: rgba(255,107,157,0.05);
             color: #fff;
             transform: scale(1.02);
         }
-
         .game-option.correct {
             border-color: #00ff88;
             background: rgba(0,255,136,0.1);
             color: #00ff88;
         }
-
         .game-option.wrong {
             border-color: #ff5757;
             background: rgba(255,87,87,0.1);
             color: #ff5757;
         }
-
         .game-option.disabled {
             cursor: not-allowed;
             opacity: 0.5;
         }
 
-        /* ===== FEEDBACK ===== */
         .game-feedback {
             margin-top: 15px;
             text-align: center;
@@ -369,20 +349,13 @@
             justify-content: center;
             flex-direction: column;
         }
-
         .game-feedback .feedback-text {
             font-family: 'Patrick Hand', cursive;
             font-size: 1.3rem;
             animation: fadeIn 0.5s ease;
         }
-
-        .game-feedback .feedback-text.correct {
-            color: #00ff88;
-        }
-        .game-feedback .feedback-text.wrong {
-            color: #ff5757;
-        }
-
+        .game-feedback .feedback-text.correct { color: #00ff88; }
+        .game-feedback .feedback-text.wrong { color: #ff5757; }
         .game-feedback .feedback-story {
             font-size: 0.9rem;
             color: rgba(255,255,255,0.5);
@@ -390,7 +363,6 @@
             max-width: 90%;
         }
 
-        /* ===== NEXT BUTTON ===== */
         .game-next-btn {
             margin-top: 15px;
             padding: 12px 40px;
@@ -408,19 +380,16 @@
             transform: translateY(10px);
             transition: all 0.4s ease;
         }
-
         .game-next-btn.show {
             opacity: 1;
             pointer-events: auto;
             transform: translateY(0);
         }
-
         .game-next-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 12px 35px rgba(255,107,157,0.5);
         }
 
-        /* ===== COMPLETE ===== */
         .game-complete {
             display: none;
             text-align: center;
@@ -1176,27 +1145,46 @@
 
     <script>
         // ============================================
-        // ===== DATA GAME (3 FOTO BERBEDA) =====
+        // ===== DATA GAME (PAKAI NAMA FILE BARU) =====
         // ============================================
         const gameData = [{
-            photo: 'puzzle.jpeg',
+            photo: 'photo1.jpeg',
             question: 'Do you remember this day? 👀',
             options: ['First date', 'First time jalan bareng', 'Random day', 'Hari paling chaos 😭'],
             correct: 0,
             story: 'Yup, ini waktu kita pertama kali date! Kamu pake baju biru, aku gugup setengah mati 😭❤️'
         }, {
-            photo: 'intro.jpeg',
+            photo: 'photo2.jpeg',
             question: 'Coba inget ini momen apa? 🤔',
             options: ['Ultah kamu', 'Ultah aku', 'Nonton film', 'Jalan-jalan'],
             correct: 1,
             story: 'Ini pas ultah aku! Kamu kasih kue surprise dan aku nangis haru 😭🎂'
         }, {
-            photo: 'foto3.jpg',
+            photo: 'photo3.jpeg',
             question: 'Terakhir, ini momen apa hayoo? 😏',
             options: ['Liburan ke pantai', 'Main ke mall', 'Makan malam', 'Nonton bioskop'],
             correct: 2,
             story: 'Ini pas kita makan malam di tempat favorit! Kamu pesen yang itu lagi 😋🍝'
         }];
+
+        // ============================================
+        // ===== CEK FOTO =====
+        // ============================================
+        function checkAllImages() {
+            const images = ['photo1.jpeg', 'photo2.jpeg', 'photo3.jpeg'];
+            images.forEach(img => {
+                fetch(img)
+                    .then(res => {
+                        if (!res.ok) {
+                            console.warn('⚠️ Foto tidak ditemukan:', img);
+                        } else {
+                            console.log('✅ Foto ditemukan:', img);
+                        }
+                    })
+                    .catch(() => console.warn('⚠️ Gagal load:', img));
+            });
+        }
+        checkAllImages();
 
         // ============================================
         // ===== NAVIGASI =====
@@ -1281,7 +1269,8 @@
 
             updateProgress();
 
-            // Set foto (blur)
+            // ===== SET FOTO (BLUR) =====
+            console.log('📸 Loading foto:', data.photo);
             photoImg.src = data.photo;
             blurOverlay.classList.remove('hidden');
             revealLabel.classList.remove('show');
@@ -1314,9 +1303,10 @@
             if (selected === correct) {
                 btn.classList.add('correct');
                 feedbackEl.innerHTML = `
-                    <div class="feedback-text correct">🥳 CORRECT! Kamu inget!</div>
+                    <div class="feedback-text correct">🎉 CORRECT! Kamu inget!</div>
                     <div class="feedback-story">"${data.story}"</div>
                 `;
+                // ===== BUKA FOTO =====
                 blurOverlay.classList.add('hidden');
                 revealLabel.textContent = `✨ ${data.story}`;
                 revealLabel.classList.add('show');
@@ -1394,7 +1384,7 @@
                 item.style.animationDelay = Math.random() * 0.5 + 's';
 
                 const img = document.createElement('img');
-                const photos = ['puzzle.jpeg', 'intro.jpeg', 'foto3.jpg'];
+                const photos = ['photo1.jpeg', 'photo2.jpeg', 'photo3.jpeg'];
                 img.src = photos[Math.floor(Math.random() * photos.length)];
                 img.alt = 'Memory';
                 img.loading = 'lazy';
@@ -1619,8 +1609,8 @@
 
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
-        console.log('🎮 Guess The Memory Game: ON (3 foto berbeda)');
-        console.log('📸 Intro: intro.jpeg | Game: puzzle.jpeg, intro.jpeg, foto3.jpg');
+        console.log('🎮 Guess The Memory Game: ON');
+        console.log('📸 Foto: photo1.jpeg, photo2.jpeg, photo3.jpeg');
     </script>
 
 </body>
