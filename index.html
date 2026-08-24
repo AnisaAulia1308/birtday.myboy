@@ -23,7 +23,7 @@
             width: 100vw;
         }
 
-        /* ===== INTRO FOTO + PUZZLE ===== */
+        /* ===== INTRO FOTO ===== */
         #introScreen {
             position: fixed;
             top: 0;
@@ -51,216 +51,71 @@
             position: absolute;
             top: 0;
             left: 0;
-            filter: blur(8px);
-            transform: scale(1.1);
         }
 
-        /* ===== PUZZLE CONTAINER ===== */
-        .puzzle-container {
-            position: relative;
-            z-index: 3;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 30px 40px 40px;
-            max-width: 500px;
-            width: 90%;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        .intro-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            padding: 20px;
         }
 
-        .puzzle-title {
+        .intro-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            color: #ff6b9d;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .puzzle-subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: 'Space Mono', monospace;
-        }
-
-        /* ===== PUZZLE SLIDER ===== */
-        .puzzle-slider-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto 20px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            border: 2px solid rgba(255,255,255,0.1);
-            background: #1a1a1a;
-        }
-
-        .puzzle-slider-container .puzzle-bg {
-            width: 100%;
-            height: 200px;
-            background: url('intro.jpeg') center/cover no-repeat;
-            filter: blur(4px);
-            opacity: 0.3;
-        }
-
-        .puzzle-slider-track {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .puzzle-slider-piece {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('intro.jpeg') center/cover no-repeat;
-            clip-path: inset(0 70% 0 0);
-            transition: clip-path 0.1s ease;
-            border-radius: 14px;
-        }
-
-        .puzzle-slider-piece .slider-handle {
-            position: absolute;
-            right: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 60px;
-            background: linear-gradient(180deg, #ff6b9d, #ffb6c1);
-            border-radius: 8px;
-            cursor: grab;
-            box-shadow: 0 0 20px rgba(255,107,157,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
+            font-size: 4rem;
             color: #fff;
-            touch-action: none;
-            user-select: none;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .puzzle-slider-piece .slider-handle:active {
-            cursor: grabbing;
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        /* ===== PUZZLE INFO ===== */
-        .puzzle-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
-            font-family: 'Space Mono', monospace;
-        }
-
-        .puzzle-progress-bar {
-            flex: 1;
-            height: 4px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            margin: 0 15px;
-            overflow: hidden;
-        }
-
-        .puzzle-progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b9d, #ffb6c1);
-            border-radius: 4px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .puzzle-status {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.3);
-            font-family: 'Space Mono', monospace;
+            text-shadow: 0 0 40px rgba(255,107,157,0.5), 0 0 80px rgba(255,107,157,0.2);
+            animation: introPulse 2s ease-in-out infinite;
             text-align: center;
-            margin-top: 5px;
         }
 
-        .puzzle-status .highlight {
-            color: #ff6b9d;
+        .intro-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 10px;
+            letter-spacing: 4px;
         }
 
-        /* ===== BUTTONS ===== */
-        .puzzle-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .puzzle-btn {
-            padding: 12px 30px;
+        .intro-btn {
+            margin-top: 40px;
+            padding: 16px 50px;
+            background: rgba(255,107,157,0.2);
+            border: 2px solid #ff6b9d;
             border-radius: 60px;
-            border: none;
+            color: #fff;
             font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: 0.4s;
-            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+            letter-spacing: 2px;
         }
 
-        .puzzle-btn.primary {
-            background: linear-gradient(135deg, #ff6b9d, #ffb6c1);
-            color: #fff;
-            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .puzzle-btn.primary.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .puzzle-btn.primary.active:hover {
+        .intro-btn:hover {
+            background: #ff6b9d;
             transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(255,107,157,0.5);
+            box-shadow: 0 0 40px rgba(255,107,157,0.4);
         }
 
-        .puzzle-btn.skip {
-            background: rgba(255,255,255,0.05);
-            color: rgba(255,255,255,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.7rem;
-            padding: 8px 16px;
+        .intro-btn i {
+            margin-right: 10px;
         }
 
-        .puzzle-btn.skip:hover {
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
+        @keyframes introPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.9; }
         }
 
-        /* ===== OVERLAY TEXT ===== */
-        .puzzle-overlay-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(255,255,255,0.15);
-            font-size: 3rem;
-            font-family: 'Great Vibes', cursive;
-            pointer-events: none;
-            text-align: center;
-            line-height: 1.2;
-            z-index: 1;
-        }
-
-        /* ===== BOOTING SCREEN ===== */
+        /* ===== BOOT SCREEN ===== */
         #bootScreen {
             position: fixed;
             top: 0;
@@ -332,6 +187,242 @@
             margin-bottom: 20px;
             opacity: 0;
             animation: bootFade 0.5s forwards 0.1s;
+        }
+
+        /* ===== PUZZLE SCREEN ===== */
+        #puzzleScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a, #1a0a1a);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9000;
+            padding: 20px;
+        }
+
+        #puzzleScreen.active {
+            display: flex;
+        }
+
+        #puzzleScreen.hidden {
+            display: none;
+        }
+
+        .puzzle-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .puzzle-header h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #ff6b9d;
+        }
+
+        .puzzle-header p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            max-width: 420px;
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 8px;
+            border: 2px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        .puzzle-piece {
+            background: #2a2a2a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            background-size: 300% 300%;
+            border: 2px solid rgba(255,255,255,0.05);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.1);
+            user-select: none;
+        }
+
+        .puzzle-piece.empty {
+            background: rgba(255,255,255,0.02) !important;
+            border: 2px dashed rgba(255,255,255,0.05);
+            cursor: default;
+        }
+
+        .puzzle-piece:hover:not(.empty) {
+            transform: scale(1.03);
+            border-color: #ff6b9d;
+            z-index: 2;
+        }
+
+        .puzzle-piece .piece-number {
+            position: absolute;
+            bottom: 4px;
+            right: 8px;
+            font-size: 0.5rem;
+            color: rgba(255,255,255,0.2);
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* ===== PUZZLE INFO ===== */
+        .puzzle-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 420px;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .puzzle-info .moves {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .puzzle-info .moves span {
+            color: #ff6b9d;
+        }
+
+        .puzzle-info .timer {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .puzzle-info .timer span {
+            color: #00ff88;
+        }
+
+        .puzzle-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .puzzle-btn {
+            padding: 12px 30px;
+            border-radius: 60px;
+            border: none;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.4s;
+            letter-spacing: 1px;
+        }
+
+        .puzzle-btn.primary {
+            background: linear-gradient(135deg, #ff6b9d, #ffb6c1);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .puzzle-btn.primary.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .puzzle-btn.primary.active:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255,107,157,0.5);
+        }
+
+        .puzzle-btn.secondary {
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .puzzle-btn.secondary:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        /* ===== CELEBRATION OVERLAY ===== */
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99998;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .celebration-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .celebration-overlay .big-emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .celebration-overlay h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #ff6b9d;
+        }
+
+        .celebration-overlay p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .celebration-overlay .btn-continue {
+            margin-top: 30px;
+            padding: 14px 50px;
+            border-radius: 60px;
+            border: none;
+            background: linear-gradient(135deg, #ff6b9d, #ffb6c1);
+            color: #fff;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 8px 30px rgba(255,107,157,0.4);
+        }
+
+        .celebration-overlay .btn-continue:hover {
+            transform: scale(1.05);
         }
 
         /* ===== DESKTOP ===== */
@@ -882,25 +973,37 @@
                 font-size: 0.6rem;
                 padding: 3px 8px;
             }
-            .puzzle-container {
-                padding: 20px;
+            .intro-title {
+                font-size: 2.5rem;
             }
-            .puzzle-title {
-                font-size: 1.5rem;
-            }
-            .puzzle-slider-container .puzzle-bg {
-                height: 150px;
-            }
-            .puzzle-slider-piece .slider-handle {
-                height: 40px;
-                width: 12px;
-                right: -6px;
+            .intro-subtitle {
+                font-size: 0.9rem;
             }
             .boot-title {
                 font-size: 2rem;
             }
             .boot-progress {
                 width: 200px;
+            }
+            .puzzle-header h2 {
+                font-size: 2rem;
+            }
+            .puzzle-container {
+                max-width: 320px;
+                gap: 4px;
+                padding: 6px;
+            }
+            .puzzle-piece {
+                min-height: 50px;
+                border-radius: 6px;
+            }
+            .puzzle-info {
+                max-width: 320px;
+                padding: 10px 15px;
+                font-size: 0.7rem;
+            }
+            .celebration-overlay h2 {
+                font-size: 2.2rem;
             }
         }
 
@@ -943,24 +1046,32 @@
             .window-body {
                 padding: 12px;
             }
+            .intro-title {
+                font-size: 2rem;
+            }
+            .intro-btn {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+            .puzzle-header h2 {
+                font-size: 1.6rem;
+            }
             .puzzle-container {
-                padding: 15px;
-                border-radius: 16px;
+                max-width: 280px;
+                gap: 3px;
+                padding: 4px;
             }
-            .puzzle-title {
-                font-size: 1.2rem;
+            .puzzle-piece {
+                min-height: 40px;
+                border-radius: 4px;
             }
-            .puzzle-subtitle {
+            .puzzle-info {
+                max-width: 280px;
+                padding: 8px 12px;
                 font-size: 0.6rem;
-            }
-            .puzzle-slider-container .puzzle-bg {
-                height: 120px;
-            }
-            .puzzle-slider-piece .slider-handle {
-                height: 30px;
-                width: 10px;
-                right: -5px;
-                font-size: 0.5rem;
+                flex-wrap: wrap;
+                gap: 5px;
+                justify-content: center;
             }
             .puzzle-buttons {
                 flex-direction: column;
@@ -968,13 +1079,15 @@
             }
             .puzzle-btn {
                 width: 100%;
+                max-width: 280px;
                 padding: 10px;
                 font-size: 0.8rem;
             }
-            .puzzle-btn.skip {
-                width: auto;
-                padding: 6px 14px;
-                font-size: 0.6rem;
+            .celebration-overlay h2 {
+                font-size: 1.8rem;
+            }
+            .celebration-overlay .big-emoji {
+                font-size: 3.5rem;
             }
             .falling-item {
                 width: 40px !important;
@@ -985,51 +1098,15 @@
 </head>
 <body>
 
-    <!-- ===== INTRO FOTO + PUZZLE ===== -->
+    <!-- ===== INTRO SCREEN ===== -->
     <div id="introScreen">
-        <!-- FOTO BACKGROUND (BLUR) -->
         <div id="introImage"></div>
-        
-        <!-- PUZZLE CONTAINER -->
-        <div class="puzzle-container">
-            <div class="puzzle-title">✨ Selesaikan Puzzle ✨</div>
-            <div class="puzzle-subtitle">Geser untuk membuka pintu</div>
-
-            <!-- PUZZLE SLIDER -->
-            <div class="puzzle-slider-container" id="puzzleSlider">
-                <div class="puzzle-bg"></div>
-                <div class="puzzle-slider-track">
-                    <div class="puzzle-slider-piece" id="puzzlePiece">
-                        <div class="slider-handle" id="sliderHandle">
-                            <i class="fas fa-grip-lines"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="puzzle-overlay-text">❤️</div>
-            </div>
-
-            <!-- PROGRESS -->
-            <div class="puzzle-info">
-                <span>0%</span>
-                <div class="puzzle-progress-bar">
-                    <div class="fill" id="puzzleProgress"></div>
-                </div>
-                <span>100%</span>
-            </div>
-
-            <div class="puzzle-status" id="puzzleStatus">
-                Geser <span class="highlight">▶</span> ke kanan untuk menyelesaikan
-            </div>
-
-            <!-- BUTTONS -->
-            <div class="puzzle-buttons">
-                <button class="puzzle-btn primary" id="enterBtn">
-                    <i class="fas fa-arrow-right"></i> Mulai Petualangan
-                </button>
-                <button class="puzzle-btn skip" id="skipBtn">
-                    Skip <i class="fas fa-forward"></i>
-                </button>
-            </div>
+        <div class="intro-overlay">
+            <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
+            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
+            <button class="intro-btn" id="startBtn">
+                <i class="fas fa-play"></i> Mulai Petualangan
+            </button>
         </div>
     </div>
 
@@ -1048,11 +1125,42 @@
         </div>
     </div>
 
+    <!-- ===== PUZZLE SCREEN ===== -->
+    <div id="puzzleScreen">
+        <div class="puzzle-header">
+            <h2>🧩 Selesaikan Puzzle</h2>
+            <p>Susun gambar dengan mengklik potongan yang berdekatan</p>
+        </div>
+
+        <div class="puzzle-container" id="puzzleContainer"></div>
+
+        <div class="puzzle-info">
+            <div class="moves">Langkah: <span id="moveCount">0</span></div>
+            <div class="timer">⏱️ <span id="timerDisplay">00:00</span></div>
+        </div>
+
+        <div class="puzzle-buttons">
+            <button class="puzzle-btn secondary" id="shuffleBtn"><i class="fas fa-random"></i> Acak</button>
+            <button class="puzzle-btn primary" id="puzzleCompleteBtn">
+                <i class="fas fa-check"></i> Selesai
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== CELEBRATION OVERLAY ===== -->
+    <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="big-emoji">🎉</div>
+        <h2>✨ Puzzle Selesai! ✨</h2>
+        <p>Kamu berhasil menyusun gambar! 🧩</p>
+        <button class="btn-continue" id="continueBtn">
+            <i class="fas fa-arrow-right"></i> Lanjut ke Desktop
+        </button>
+    </div>
+
     <!-- ===== DESKTOP ===== -->
     <div id="desktop">
         <div class="wallpaper"></div>
 
-        <!-- Desktop Icons -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-app="memories">
                 <div class="icon">📸</div>
@@ -1085,7 +1193,6 @@
         </div>
 
         <!-- ===== WINDOWS ===== -->
-        <!-- Memories -->
         <div class="window" id="window-memories">
             <div class="window-header">
                 <span class="window-title">📸 Memories</span>
@@ -1131,7 +1238,6 @@
             </div>
         </div>
 
-        <!-- Chat -->
         <div class="window" id="window-chat">
             <div class="window-header">
                 <span class="window-title">💬 Our Chat</span>
@@ -1179,7 +1285,6 @@
             </div>
         </div>
 
-        <!-- Song -->
         <div class="window" id="window-song">
             <div class="window-header">
                 <span class="window-title">🎵 Your Song</span>
@@ -1210,7 +1315,6 @@
             </div>
         </div>
 
-        <!-- Why You -->
         <div class="window" id="window-why">
             <div class="window-header">
                 <span class="window-title">❤️ Why You</span>
@@ -1258,7 +1362,6 @@
             </div>
         </div>
 
-        <!-- Places -->
         <div class="window" id="window-places">
             <div class="window-header">
                 <span class="window-title">🗺️ Our Places</span>
@@ -1294,7 +1397,6 @@
             </div>
         </div>
 
-        <!-- Game -->
         <div class="window" id="window-game">
             <div class="window-header">
                 <span class="window-title">🎮 Mini Game</span>
@@ -1323,7 +1425,6 @@
             </div>
         </div>
 
-        <!-- Secret -->
         <div class="window" id="window-secret">
             <div class="window-header">
                 <span class="window-title">🎁 Secret File</span>
@@ -1366,170 +1467,224 @@
 
     <script>
         // ============================================
-        // ===== PUZZLE SLIDER LOGIC =====
+        // ===== SCREEN NAVIGATION =====
         // ============================================
-        const sliderHandle = document.getElementById('sliderHandle');
-        const puzzlePiece = document.getElementById('puzzlePiece');
-        const puzzleProgress = document.getElementById('puzzleProgress');
-        const puzzleStatus = document.getElementById('puzzleStatus');
-        const enterBtn = document.getElementById('enterBtn');
-        const skipBtn = document.getElementById('skipBtn');
         const introScreen = document.getElementById('introScreen');
         const bootScreen = document.getElementById('bootScreen');
+        const puzzleScreen = document.getElementById('puzzleScreen');
         const desktop = document.getElementById('desktop');
+        const startBtn = document.getElementById('startBtn');
+        const celebrationOverlay = document.getElementById('celebrationOverlay');
+        const continueBtn = document.getElementById('continueBtn');
 
-        let isDragging = false;
-        let startX = 0;
-        let currentX = 0;
-        let progress = 0;
-        let isComplete = false;
+        // ============================================
+        // ===== PUZZLE LOGIC (3x3) =====
+        // ============================================
+        const puzzleContainer = document.getElementById('puzzleContainer');
+        const moveCountEl = document.getElementById('moveCount');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const puzzleCompleteBtn = document.getElementById('puzzleCompleteBtn');
 
-        // ===== DRAG FUNCTIONS =====
-        function startDrag(e) {
-            if (isComplete) return;
-            isDragging = true;
-            const touch = e.touches ? e.touches[0] : e;
-            startX = touch.clientX;
-            sliderHandle.style.cursor = 'grabbing';
-            e.preventDefault();
+        let moves = 0;
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let isPuzzleComplete = false;
+        let puzzleState = [];
+
+        // Ukuran 3x3 = 9 pieces, index 0-8, index terakhir (8) adalah empty
+        const SIZE = 3;
+        const EMPTY = 8;
+
+        // ===== SHUFFLE FUNCTION =====
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
 
-        function moveDrag(e) {
-            if (!isDragging || isComplete) return;
-            const touch = e.touches ? e.touches[0] : e;
-            const deltaX = touch.clientX - startX;
+        // ===== CHECK SOLVABLE =====
+        function isSolvable(state) {
+            let inversions = 0;
+            const flat = state.filter(n => n !== EMPTY);
+            for (let i = 0; i < flat.length; i++) {
+                for (let j = i + 1; j < flat.length; j++) {
+                    if (flat[i] > flat[j]) inversions++;
+                }
+            }
+            // Untuk puzzle 3x3, solvable jika inversions genap
+            return inversions % 2 === 0;
+        }
+
+        // ===== GENERATE PUZZLE =====
+        function generatePuzzle() {
+            let pieces = [];
+            for (let i = 0; i < 9; i++) pieces.push(i);
             
-            // Batasi pergerakan
-            const container = document.getElementById('puzzleSlider');
-            const containerWidth = container.offsetWidth - 20;
-            const maxMove = containerWidth - 40;
+            do {
+                pieces = shuffle(pieces);
+            } while (!isSolvable(pieces) || pieces.join(',') === '0,1,2,3,4,5,6,7,8');
             
-            currentX = Math.max(0, Math.min(deltaX, maxMove));
-            
-            // Update progress
-            progress = (currentX / maxMove) * 100;
-            progress = Math.min(100, Math.max(0, progress));
-            
-            // Update visual
-            const pieceWidth = containerWidth;
-            const clipValue = (progress / 100) * pieceWidth;
-            puzzlePiece.style.clipPath = `inset(0 ${pieceWidth - clipValue}px 0 0)`;
-            
-            // Update progress bar
-            puzzleProgress.style.width = progress + '%';
-            
-            // Update status
-            if (progress >= 100) {
-                completePuzzle();
-            } else {
-                puzzleStatus.innerHTML = `Geser <span class="highlight">▶</span> ke kanan untuk menyelesaikan`;
-                puzzleStatus.style.color = 'rgba(255,255,255,0.3)';
+            return pieces;
+        }
+
+        // ===== RENDER PUZZLE =====
+        function renderPuzzle() {
+            puzzleContainer.innerHTML = '';
+            puzzleState.forEach((piece, index) => {
+                const div = document.createElement('div');
+                div.className = 'puzzle-piece';
+                div.dataset.index = index;
+
+                if (piece === EMPTY) {
+                    div.classList.add('empty');
+                    div.innerHTML = '';
+                } else {
+                    const row = Math.floor(piece / SIZE);
+                    const col = piece % SIZE;
+                    const bgSize = 300;
+                    const xPos = (col / (SIZE - 1)) * 100;
+                    const yPos = (row / (SIZE - 1)) * 100;
+                    
+                    div.style.backgroundImage = "url('puzzle.jpeg')";
+                    div.style.backgroundSize = `${bgSize}% ${bgSize}%`;
+                    div.style.backgroundPosition = `${xPos}% ${yPos}%`;
+                    div.style.backgroundRepeat = 'no-repeat';
+                    
+                    const num = document.createElement('span');
+                    num.className = 'piece-number';
+                    num.textContent = piece + 1;
+                    div.appendChild(num);
+                }
+
+                div.addEventListener('click', () => handlePieceClick(index));
+                puzzleContainer.appendChild(div);
+            });
+        }
+
+        // ===== HANDLE PIECE CLICK =====
+        function handlePieceClick(index) {
+            if (isPuzzleComplete) return;
+
+            const emptyIndex = puzzleState.indexOf(EMPTY);
+            const emptyRow = Math.floor(emptyIndex / SIZE);
+            const emptyCol = emptyIndex % SIZE;
+            const clickedRow = Math.floor(index / SIZE);
+            const clickedCol = index % SIZE;
+
+            // Cek apakah klik berdekatan (atas, bawah, kiri, kanan)
+            const isAdjacent = (
+                (Math.abs(emptyRow - clickedRow) === 1 && emptyCol === clickedCol) ||
+                (Math.abs(emptyCol - clickedCol) === 1 && emptyRow === clickedRow)
+            );
+
+            if (isAdjacent) {
+                // Swap
+                [puzzleState[emptyIndex], puzzleState[index]] = [puzzleState[index], puzzleState[emptyIndex]];
+                moves++;
+                moveCountEl.textContent = moves;
+                renderPuzzle();
+                checkWin();
             }
         }
 
-        function endDrag(e) {
-            if (!isDragging) return;
-            isDragging = false;
-            sliderHandle.style.cursor = 'grab';
-            
-            // Kalau belum complete dan progress < 50%, balikin ke awal
-            if (!isComplete && progress < 50) {
-                resetPuzzle();
+        // ===== CHECK WIN =====
+        function checkWin() {
+            const solved = puzzleState.every((val, idx) => val === idx);
+            if (solved) {
+                isPuzzleComplete = true;
+                if (timerInterval) clearInterval(timerInterval);
+                puzzleCompleteBtn.classList.add('active');
+                celebrationOverlay.classList.add('active');
+                createCelebration();
             }
-        }
-
-        // ===== COMPLETE PUZZLE =====
-        function completePuzzle() {
-            isComplete = true;
-            puzzleStatus.innerHTML = '✅ <span style="color:#00ff88;">Selesai! Selamat!</span>';
-            puzzleStatus.style.color = '#00ff88';
-            enterBtn.classList.add('active');
-            enterBtn.style.opacity = '1';
-            enterBtn.style.pointerEvents = 'auto';
-            puzzlePiece.style.clipPath = 'inset(0 0 0 0)';
-            puzzleProgress.style.width = '100%';
-            
-            // Efek particle sederhana
-            createCelebration();
         }
 
         // ===== RESET PUZZLE =====
         function resetPuzzle() {
-            if (isComplete) return;
-            progress = 0;
-            currentX = 0;
-            const container = document.getElementById('puzzleSlider');
-            const containerWidth = container.offsetWidth - 20;
-            puzzlePiece.style.clipPath = `inset(0 ${containerWidth}px 0 0)`;
-            puzzleProgress.style.width = '0%';
-            puzzleStatus.innerHTML = `Geser <span class="highlight">▶</span> ke kanan untuk menyelesaikan`;
-            puzzleStatus.style.color = 'rgba(255,255,255,0.3)';
+            if (timerInterval) clearInterval(timerInterval);
+            timerSeconds = 0;
+            timerDisplay.textContent = '00:00';
+            moves = 0;
+            moveCountEl.textContent = '0';
+            isPuzzleComplete = false;
+            puzzleCompleteBtn.classList.remove('active');
+            celebrationOverlay.classList.remove('active');
+            puzzleState = generatePuzzle();
+            renderPuzzle();
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                const secs = String(timerSeconds % 60).padStart(2, '0');
+                timerDisplay.textContent = `${mins}:${secs}`;
+            }, 1000);
         }
 
         // ===== CELEBRATION =====
         function createCelebration() {
-            const emojis = ['🎉', '✨', '💖', '🎊', '❤️', '⭐', '🌈', '💕'];
-            for (let i = 0; i < 30; i++) {
+            const emojis = ['🎉', '✨', '💖', '🎊', '❤️', '⭐', '🌈', '💕', '🧩', '🎁'];
+            for (let i = 0; i < 40; i++) {
                 setTimeout(() => {
                     const el = document.createElement('div');
                     el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                     el.style.cssText = `
                         position: fixed;
-                        font-size: ${Math.random() * 2 + 1}rem;
+                        font-size: ${Math.random() * 2.5 + 1}rem;
                         left: ${Math.random() * 100}%;
                         top: -20px;
                         z-index: 99999;
                         pointer-events: none;
-                        animation: fall 3s linear forwards;
+                        animation: fall 4s linear forwards;
                         animation-delay: ${Math.random() * 0.5}s;
                     `;
                     document.body.appendChild(el);
-                    setTimeout(() => el.remove(), 4000);
-                }, i * 50);
+                    setTimeout(() => el.remove(), 5000);
+                }, i * 60);
             }
         }
 
-        // ===== EVENT LISTENERS =====
-        // Mouse
-        sliderHandle.addEventListener('mousedown', startDrag);
-        document.addEventListener('mousemove', moveDrag);
-        document.addEventListener('mouseup', endDrag);
-
-        // Touch
-        sliderHandle.addEventListener('touchstart', startDrag, { passive: false });
-        document.addEventListener('touchmove', moveDrag, { passive: false });
-        document.addEventListener('touchend', endDrag, { passive: false });
-
-        // ===== ENTER BUTTON =====
-        enterBtn.addEventListener('click', goToBoot);
-        skipBtn.addEventListener('click', goToBoot);
-
-        // Keyboard shortcut
-        document.addEventListener('keydown', (e) => {
-            if ((e.key === 'Enter' || e.key === ' ') && isComplete && !introScreen.classList.contains('hidden')) {
-                goToBoot();
-            }
-            if (e.key === 'Escape' && !introScreen.classList.contains('hidden')) {
-                goToBoot(); // Skip via Escape
-            }
-        });
-
-        // ===== FUNCTION GO TO BOOT =====
+        // ============================================
+        // ===== NAVIGATION =====
+        // ============================================
         function goToBoot() {
             introScreen.classList.add('hidden');
             setTimeout(() => {
                 bootScreen.classList.add('active');
                 setTimeout(() => {
                     bootScreen.classList.remove('active');
-                    desktop.classList.add('active');
-                    setTimeout(() => {
-                        startFallingContent();
-                    }, 1000);
+                    puzzleScreen.classList.add('active');
+                    resetPuzzle();
                 }, 5000);
             }, 1500);
         }
 
+        function goToDesktop() {
+            celebrationOverlay.classList.remove('active');
+            puzzleScreen.classList.remove('active');
+            if (timerInterval) clearInterval(timerInterval);
+            desktop.classList.add('active');
+            setTimeout(() => {
+                startFallingContent();
+            }, 500);
+        }
+
+        // ===== EVENT LISTENERS =====
+        startBtn.addEventListener('click', goToBoot);
+        continueBtn.addEventListener('click', goToDesktop);
+        shuffleBtn.addEventListener('click', resetPuzzle);
+
+        // Keyboard shortcut: Enter untuk skip intro
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !introScreen.classList.contains('hidden')) {
+                goToBoot();
+            }
+        });
+
+        // ============================================
         // ===== FALLING CONTENT =====
+        // ============================================
         let fallingInterval;
 
         const photoListFalling = [
@@ -1577,7 +1732,9 @@
             }, duration * 1000 + 1000);
         }
 
+        // ============================================
         // ===== TASKBAR TIME =====
+        // ============================================
         function updateTime() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -1587,7 +1744,9 @@
         updateTime();
         setInterval(updateTime, 10000);
 
+        // ============================================
         // ===== WINDOW MANAGEMENT =====
+        // ============================================
         let openWindows = [];
         let windowZIndex = 50;
 
@@ -1664,7 +1823,9 @@
             });
         }
 
+        // ============================================
         // ===== DESKTOP ICON CLICKS =====
+        // ============================================
         document.querySelectorAll('.desktop-icon').forEach(icon => {
             icon.addEventListener('dblclick', () => {
                 const app = icon.dataset.app;
@@ -1681,7 +1842,9 @@
             });
         });
 
+        // ============================================
         // ===== GAME LOGIC =====
+        // ============================================
         let gameScore = 0;
         let gameCompleted = false;
         let currentQuestion = 0;
@@ -1751,7 +1914,9 @@
 
         loadQuestion();
 
+        // ============================================
         // ===== SONG PLAYER =====
+        // ============================================
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playSongBtn');
         const progressFill = document.getElementById('songFill');
@@ -1805,7 +1970,9 @@
             audio.currentTime = percentage * audio.duration;
         });
 
+        // ============================================
         // ===== KEYBOARD SHORTCUTS =====
+        // ============================================
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && openWindows.length > 0) {
                 const lastApp = openWindows[openWindows.length - 1];
@@ -1813,7 +1980,9 @@
             }
         });
 
+        // ============================================
         // ===== RESPONSIVE =====
+        // ============================================
         document.addEventListener('click', (e) => {
             if (window.innerWidth < 768 && desktop.classList.contains('active')) {
                 const isWindow = e.target.closest('.window');
@@ -1827,7 +1996,9 @@
 
         console.log('✨ [NAMA DIA] OS — Version [UMUR]');
         console.log('❤️ Made with love for someone special');
-        console.log('🧩 Puzzle mode: ON');
+        console.log('🧩 Puzzle mode: ON (3x3)');
+        console.log('📸 Intro foto: intro.jpeg');
+        console.log('🧩 Puzzle foto: puzzle.jpeg');
     </script>
 
 </body>
