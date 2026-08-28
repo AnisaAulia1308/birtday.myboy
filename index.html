@@ -596,6 +596,7 @@
             font-size: 0.5rem;
         }
 
+        /* ===== WINDOW ===== */
         .window {
             position: absolute;
             top: 10%;
@@ -667,39 +668,110 @@
             border-radius: 4px;
         }
 
+        /* ===== MEMORIES ===== */
         .memory-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             gap: 15px;
         }
         .memory-item {
             background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
-            border: 1px solid transparent;
+            border: 1px solid rgba(255,255,255,0.05);
         }
         .memory-item:hover {
             background: rgba(255,255,255,0.08);
             border-color: #ff6b9d;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255,107,157,0.15);
         }
-        .memory-item .emoji {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 10px;
+        .memory-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .memory-item img:hover {
+            transform: scale(1.03);
         }
         .memory-item .title {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
         }
         .memory-item .date {
             font-size: 0.6rem;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.35);
+            margin-top: 2px;
         }
 
+        /* ===== MEMORIES POPUP ===== */
+        .memory-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+            cursor: pointer;
+        }
+        .memory-popup.active {
+            display: flex;
+        }
+        .memory-popup .popup-content {
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(20,20,30,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: default;
+        }
+        .memory-popup .popup-content img {
+            max-width: 80vh;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        .memory-popup .popup-content .popup-caption {
+            color: #fff;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .memory-popup .popup-content .popup-caption .popup-title {
+            color: #ff6b9d;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+        }
+        .memory-popup .popup-content .popup-caption .popup-date {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+        .memory-popup .popup-content .popup-caption .popup-hint {
+            color: rgba(255,255,255,0.2);
+            font-size: 0.7rem;
+            margin-top: 8px;
+        }
+
+        /* ===== OTHER APPS ===== */
         .chat-container {
             max-width: 500px;
             margin: 0 auto;
@@ -911,6 +983,8 @@
             .desktop-icons { grid-template-columns: repeat(auto-fill, 70px); gap: 5px; }
             .desktop-icon .icon { font-size: 1.8rem; }
             .desktop-icon .label { font-size: 0.55rem; }
+            .memory-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .memory-item img { height: 100px; }
         }
 
         @media (max-width: 480px) {
@@ -933,6 +1007,12 @@
             .taskbar-time { font-size: 0.6rem; padding: 3px 6px; }
             .window-body { padding: 12px; }
             .falling-item { width: 40px !important; height: 40px !important; }
+            .memory-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+            .memory-item { padding: 8px; }
+            .memory-item img { height: 80px; border-radius: 6px; }
+            .memory-item .title { font-size: 0.7rem; }
+            .memory-popup .popup-content img { max-height: 50vh; }
+            .memory-popup .popup-content { padding: 12px; }
         }
     </style>
 </head>
@@ -1020,21 +1100,54 @@
             <div class="desktop-icon locked" data-app="secret"><div class="icon">🎁</div><div class="label">Secret File</div></div>
         </div>
 
-        <!-- WINDOWS -->
+        <!-- ===== WINDOWS ===== -->
+        <!-- MEMORIES -->
         <div class="window" id="window-memories">
-            <div class="window-header"><span class="window-title">📸 Memories</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
+            <div class="window-header">
+                <span class="window-title">📸 Memories</span>
+                <div class="window-controls">
+                    <button class="minimize"></button>
+                    <button class="maximize"></button>
+                    <button class="close"></button>
+                </div>
+            </div>
             <div class="window-body">
                 <div class="memory-grid">
-                    <div class="memory-item"><span class="emoji">🌅</span><div class="title">Sunset pertama</div><div class="date">12 Jan 2025</div></div>
-                    <div class="memory-item"><span class="emoji">🍜</span><div class="title">Makan malam</div><div class="date">5 Feb 2025</div></div>
-                    <div class="memory-item"><span class="emoji">🎂</span><div class="title">Ulangan tahun kemarin</div><div class="date">23 Agu 2025</div></div>
-                    <div class="memory-item"><span class="emoji">🏖️</span><div class="title">Liburan ke pantai</div><div class="date">15 Mar 2025</div></div>
-                    <div class="memory-item"><span class="emoji">🎄</span><div class="title">Natal bersama</div><div class="date">24 Des 2025</div></div>
-                    <div class="memory-item"><span class="emoji">💕</span><div class="title">Pertama ketemu</div><div class="date">1 Jan 2025</div></div>
+                    <div class="memory-item" onclick="openMemory('memory1.jpeg', 'Sunset pertama kita', '12 Jan 2025')">
+                        <img src="memory1.jpeg" alt="Sunset" loading="lazy" />
+                        <div class="title">Sunset pertama</div>
+                        <div class="date">12 Jan 2025</div>
+                    </div>
+                    <div class="memory-item" onclick="openMemory('memory2.jpeg', 'Makan malam bareng', '5 Feb 2025')">
+                        <img src="memory2.jpeg" alt="Makan malam" loading="lazy" />
+                        <div class="title">Makan malam</div>
+                        <div class="date">5 Feb 2025</div>
+                    </div>
+                    <div class="memory-item" onclick="openMemory('memory3.jpeg', 'Liburan ke pantai', '15 Mar 2025')">
+                        <img src="memory3.jpeg" alt="Pantai" loading="lazy" />
+                        <div class="title">Liburan ke pantai</div>
+                        <div class="date">15 Mar 2025</div>
+                    </div>
+                    <div class="memory-item" onclick="openMemory('memory4.jpeg', 'Natal bersama', '24 Des 2025')">
+                        <img src="memory4.jpeg" alt="Natal" loading="lazy" />
+                        <div class="title">Natal bersama</div>
+                        <div class="date">24 Des 2025</div>
+                    </div>
+                    <div class="memory-item" onclick="openMemory('memory5.jpeg', 'Pertama ketemu', '1 Jan 2025')">
+                        <img src="memory5.jpeg" alt="Pertama ketemu" loading="lazy" />
+                        <div class="title">Pertama ketemu</div>
+                        <div class="date">1 Jan 2025</div>
+                    </div>
+                    <div class="memory-item" onclick="openMemory('memory6.jpeg', 'Keseruan bareng', '20 Jun 2025')">
+                        <img src="memory6.jpeg" alt="Keseruan" loading="lazy" />
+                        <div class="title">Keseruan bareng</div>
+                        <div class="date">20 Jun 2025</div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- CHAT -->
         <div class="window" id="window-chat">
             <div class="window-header"><span class="window-title">💬 Our Chat</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
@@ -1051,6 +1164,7 @@
             </div>
         </div>
 
+        <!-- SONG -->
         <div class="window" id="window-song">
             <div class="window-header"><span class="window-title">🎵 Your Song</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
@@ -1070,6 +1184,7 @@
             </div>
         </div>
 
+        <!-- WHY YOU -->
         <div class="window" id="window-why">
             <div class="window-header"><span class="window-title">❤️ Why You</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
@@ -1086,6 +1201,7 @@
             </div>
         </div>
 
+        <!-- PLACES -->
         <div class="window" id="window-places">
             <div class="window-header"><span class="window-title">🗺️ Our Places</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
@@ -1098,6 +1214,7 @@
             </div>
         </div>
 
+        <!-- MINI GAME -->
         <div class="window" id="window-game">
             <div class="window-header"><span class="window-title">🎮 Mini Game</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
@@ -1115,6 +1232,7 @@
             </div>
         </div>
 
+        <!-- SECRET -->
         <div class="window" id="window-secret">
             <div class="window-header"><span class="window-title">🎁 Secret File</span><div class="window-controls"><button class="minimize"></button><button class="maximize"></button><button class="close"></button></div></div>
             <div class="window-body">
@@ -1143,16 +1261,28 @@
         </div>
     </div>
 
+    <!-- ===== MEMORIES POPUP ===== -->
+    <div class="memory-popup" id="memoryPopup" onclick="closeMemoryPopup(event)">
+        <div class="popup-content" onclick="event.stopPropagation()">
+            <img id="popupImg" src="" alt="Memory" />
+            <div class="popup-caption">
+                <div class="popup-title" id="popupTitle">Title</div>
+                <div class="popup-date" id="popupDate">Date</div>
+                <div class="popup-hint">Klik di luar foto untuk tutup</div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================================
-        // ===== DATA GAME (PAKAI NAMA FILE BARU) =====
+        // ===== DATA GAME =====
         // ============================================
         const gameData = [{
             photo: 'photo1.jpeg',
             question: 'Do you remember this day? 👀',
             options: ['First Eid visit', 'First time jalan bareng', 'Random day', 'Hari paling chaos 😭'],
             correct: 0,
-            story: 'Yup, ini waktu kita pertama kali ke rumah nenek  kamuu! Kamu pake baju biru, aku di situ gugup bngt jujur tapi untungnya pada baik baget sama aku😭❤️'
+            story: 'Yup, ini waktu kita pertama kali ke rumah nenek kamu! Kamu pake baju biru, aku di situ gugup bngt jujur tapi untungnya pada baik baget sama aku😭❤️'
         }, {
             photo: 'photo2.jpeg',
             question: 'Coba inget ini momen apa? 🤔',
@@ -1163,14 +1293,46 @@
             photo: 'photo3.jpeg',
             question: 'Terakhir, ini momen apa hayoo? 😏',
             options: ['Liburan ke pantai', 'ini pas berenang', 'Makan malam', 'Nonton bioskop'],
-            correct: 2,
+            correct: 1,
             story: 'Ini pas kita berenang di lembah hijau! seru bareng th dini'
         }];
+
+        // ============================================
+        // ===== MEMORIES POPUP =====
+        // ============================================
+        const memoryPopup = document.getElementById('memoryPopup');
+        const popupImg = document.getElementById('popupImg');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupDate = document.getElementById('popupDate');
+
+        function openMemory(photo, title, date) {
+            popupImg.src = photo;
+            popupTitle.textContent = title;
+            popupDate.textContent = '📅 ' + date;
+            memoryPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMemoryPopup(event) {
+            if (event.target === memoryPopup || event.target.classList.contains('memory-popup')) {
+                memoryPopup.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && memoryPopup.classList.contains('active')) {
+                memoryPopup.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
         // ============================================
         // ===== CEK FOTO =====
         // ============================================
         function checkAllImages() {
-            const images = ['photo1.jpeg', 'photo2.jpeg', 'photo3.jpeg'];
+            const images = ['photo1.jpeg', 'photo2.jpeg', 'photo3.jpeg', 'memory1.jpeg', 'memory2.jpeg', 'memory3.jpeg', 'memory4.jpeg', 'memory5.jpeg', 'memory6.jpeg'];
             images.forEach(img => {
                 fetch(img)
                     .then(res => {
@@ -1268,17 +1430,14 @@
 
             updateProgress();
 
-            // ===== SET FOTO (BLUR) =====
             console.log('📸 Loading foto:', data.photo);
             photoImg.src = data.photo;
             blurOverlay.classList.remove('hidden');
             revealLabel.classList.remove('show');
             revealLabel.textContent = '';
 
-            // Set question
             questionEl.innerHTML = data.question;
 
-            // Set options
             optionsEl.innerHTML = '';
             data.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
@@ -1305,7 +1464,6 @@
                     <div class="feedback-text correct">🎉 CORRECT! Kamu inget!</div>
                     <div class="feedback-story">"${data.story}"</div>
                 `;
-                // ===== BUKA FOTO =====
                 blurOverlay.classList.add('hidden');
                 revealLabel.textContent = `✨ ${data.story}`;
                 revealLabel.classList.add('show');
@@ -1610,6 +1768,7 @@
         console.log('❤️ Made with love for someone special');
         console.log('🎮 Guess The Memory Game: ON');
         console.log('📸 Foto: photo1.jpeg, photo2.jpeg, photo3.jpeg');
+        console.log('📸 Memories: memory1.jpeg - memory6.jpeg');
     </script>
 
 </body>
