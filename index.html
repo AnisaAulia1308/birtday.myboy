@@ -213,6 +213,7 @@
             100% { transform: translateY(110vh) rotate(720deg) scale(0.3); opacity: 0; }
         }
 
+        /* ===== TASKBAR ===== */
         .taskbar {
             position: absolute;
             bottom: 0;
@@ -283,6 +284,7 @@
         }
         .taskbar-time:hover { background: rgba(255,255,255,0.05); }
 
+        /* ===== DESKTOP ICONS ===== */
         .desktop-icons {
             position: absolute;
             top: 20px;
@@ -329,6 +331,219 @@
         .desktop-icon.locked .label::after {
             content: ' 🔒';
             font-size: 0.5rem;
+        }
+
+        /* ===== VIDEO PLAYER (Desktop Memory) ===== */
+        .desktop-video {
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            width: 340px;
+            background: rgba(20,20,30,0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+            z-index: 5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .desktop-video:hover {
+            transform: translateY(-50%) scale(1.02);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.8);
+        }
+
+        .desktop-video .video-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .desktop-video .video-header .video-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .desktop-video .video-header .video-title i {
+            color: #ff6b9d;
+            font-size: 0.85rem;
+        }
+
+        .desktop-video .video-header .video-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .desktop-video .video-header .video-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .desktop-video .video-header .video-dots .dot-red { background: #ff5f57; }
+        .desktop-video .video-header .video-dots .dot-yellow { background: #ffbd2e; }
+        .desktop-video .video-header .video-dots .dot-green { background: #28c840; }
+
+        .desktop-video .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #0a0a0a;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .desktop-video .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .desktop-video .video-wrapper .video-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            transition: opacity 0.4s ease;
+            opacity: 1;
+            pointer-events: none;
+        }
+
+        .desktop-video .video-wrapper .video-play-overlay.hidden {
+            opacity: 0;
+        }
+
+        .desktop-video .video-wrapper .video-play-overlay i {
+            font-size: 3.5rem;
+            color: rgba(255,255,255,0.8);
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .desktop-video .video-wrapper .video-play-overlay i:hover {
+            transform: scale(1.1);
+        }
+
+        /* Video Controls */
+        .desktop-video .video-controls {
+            padding: 10px 14px 12px;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .desktop-video .video-controls .video-progress {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .desktop-video .video-controls .video-progress .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ffb6c1);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .desktop-video .video-controls .video-progress .progress-dot {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            left: 0%;
+            margin-left: -5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .desktop-video .video-controls .video-progress:hover .progress-dot {
+            opacity: 1;
+        }
+
+        .desktop-video .video-controls .video-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .desktop-video .video-controls .video-buttons .left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .desktop-video .video-controls .video-buttons .left button {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 4px;
+        }
+
+        .desktop-video .video-controls .video-buttons .left button:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .desktop-video .video-controls .video-buttons .left button.play-btn {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .desktop-video .video-controls .video-buttons .left button.play-btn:hover {
+            color: #ff6b9d;
+        }
+
+        .desktop-video .video-controls .video-buttons .time {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.4);
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .desktop-video .video-controls .video-buttons .right button {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 4px;
+        }
+
+        .desktop-video .video-controls .video-buttons .right button:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .desktop-video .video-controls .video-buttons .right button.active {
+            color: #ff6b9d;
         }
 
         /* ===== WINDOW ===== */
@@ -902,6 +1117,12 @@
             .game-options-app { grid-template-columns: 1fr 1fr; gap: 8px; }
             .game-option-app { padding: 10px 8px; font-size: 0.8rem; }
             .game-photo-app { aspect-ratio: 4/3; }
+            .desktop-video {
+                width: 280px;
+                right: 15px;
+                top: 55%;
+            }
+            .desktop-video .video-wrapper { aspect-ratio: 16/9; }
         }
 
         @media (max-width: 480px) {
@@ -930,6 +1151,19 @@
             .game-question-app { font-size: 0.95rem; }
             .game-feedback-app .feedback-text { font-size: 1rem; }
             .game-photo-app { aspect-ratio: 4/3; }
+            .desktop-video {
+                width: 200px;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%) scale(0.9);
+            }
+            .desktop-video:hover { transform: translateY(-50%) scale(0.92); }
+            .desktop-video .video-header .video-title { font-size: 0.6rem; }
+            .desktop-video .video-controls { padding: 6px 10px 8px; }
+            .desktop-video .video-controls .video-buttons .left { gap: 8px; }
+            .desktop-video .video-controls .video-buttons .left button { font-size: 0.8rem; }
+            .desktop-video .video-controls .video-buttons .left button.play-btn { font-size: 1rem; }
+            .desktop-video .video-controls .video-buttons .time { font-size: 0.5rem; }
         }
     </style>
 </head>
@@ -966,6 +1200,7 @@
     <div id="desktop">
         <div class="wallpaper"></div>
 
+        <!-- DESKTOP ICONS -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-app="memories"><div class="icon">📸</div><div class="label">Memories</div></div>
             <div class="desktop-icon" data-app="chat"><div class="icon">💬</div><div class="label">Our Chat</div></div>
@@ -974,6 +1209,45 @@
             <div class="desktop-icon" data-app="places"><div class="icon">🗺️</div><div class="label">Our Places</div></div>
             <div class="desktop-icon" data-app="game"><div class="icon">🎮</div><div class="label">Mini Game</div></div>
             <div class="desktop-icon locked" data-app="secret"><div class="icon">🎁</div><div class="label">Secret File</div></div>
+        </div>
+
+        <!-- ===== VIDEO PLAYER (Desktop Memory) ===== -->
+        <div class="desktop-video" id="desktopVideo">
+            <div class="video-header">
+                <div class="video-title">
+                    <i class="fas fa-film"></i> Our Memory ✨
+                </div>
+                <div class="video-dots">
+                    <span class="dot-red"></span>
+                    <span class="dot-yellow"></span>
+                    <span class="dot-green"></span>
+                </div>
+            </div>
+            <div class="video-wrapper" id="videoWrapper">
+                <video id="memoryVideo" preload="metadata" playsinline>
+                    <source src="video-us.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-play-overlay" id="videoPlayOverlay">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+            <div class="video-controls">
+                <div class="video-progress" id="videoProgress">
+                    <div class="progress-fill" id="videoProgressFill"></div>
+                    <div class="progress-dot" id="videoProgressDot"></div>
+                </div>
+                <div class="video-buttons">
+                    <div class="left">
+                        <button class="play-btn" id="videoPlayBtn"><i class="fas fa-play"></i></button>
+                        <button id="videoMuteBtn"><i class="fas fa-volume-up"></i></button>
+                        <span class="time" id="videoTime">0:00 / 0:00</span>
+                    </div>
+                    <div class="right">
+                        <button id="videoFullscreenBtn"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- ===== WINDOWS ===== -->
@@ -1091,7 +1365,7 @@
             </div>
         </div>
 
-        <!-- ===== MINI GAME (Guess The Memory) ===== -->
+        <!-- MINI GAME -->
         <div class="window" id="window-game">
             <div class="window-header">
                 <span class="window-title">🎮 Mini Game</span>
@@ -1278,6 +1552,111 @@
         document.addEventListener('keydown', (e) => {
             if ((e.key === 'Enter' || e.key === 'Escape') && !introScreen.classList.contains('hidden')) {
                 goToBoot();
+            }
+        });
+
+        // ============================================
+        // ===== VIDEO PLAYER =====
+        // ============================================
+        const video = document.getElementById('memoryVideo');
+        const videoWrapper = document.getElementById('videoWrapper');
+        const videoPlayBtn = document.getElementById('videoPlayBtn');
+        const videoPlayOverlay = document.getElementById('videoPlayOverlay');
+        const videoMuteBtn = document.getElementById('videoMuteBtn');
+        const videoProgress = document.getElementById('videoProgress');
+        const videoProgressFill = document.getElementById('videoProgressFill');
+        const videoProgressDot = document.getElementById('videoProgressDot');
+        const videoTime = document.getElementById('videoTime');
+        const videoFullscreenBtn = document.getElementById('videoFullscreenBtn');
+
+        let isVideoPlaying = false;
+        let isVideoMuted = false;
+
+        // Toggle Play/Pause
+        function toggleVideoPlay() {
+            if (video.paused) {
+                video.play();
+                isVideoPlaying = true;
+                videoPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                videoPlayOverlay.classList.add('hidden');
+            } else {
+                video.pause();
+                isVideoPlaying = false;
+                videoPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+                videoPlayOverlay.classList.remove('hidden');
+            }
+        }
+
+        videoPlayBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleVideoPlay();
+        });
+
+        videoPlayOverlay.addEventListener('click', toggleVideoPlay);
+
+        videoWrapper.addEventListener('click', toggleVideoPlay);
+
+        // Mute/Unmute
+        videoMuteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isVideoMuted = !isVideoMuted;
+            video.muted = isVideoMuted;
+            videoMuteBtn.innerHTML = isVideoMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+        });
+
+        // Progress Bar
+        video.addEventListener('timeupdate', () => {
+            const percent = (video.currentTime / video.duration) * 100;
+            videoProgressFill.style.width = percent + '%';
+            videoProgressDot.style.left = percent + '%';
+
+            const currentMins = Math.floor(video.currentTime / 60);
+            const currentSecs = Math.floor(video.currentTime % 60);
+            const totalMins = Math.floor(video.duration / 60);
+            const totalSecs = Math.floor(video.duration % 60);
+            videoTime.textContent = `${currentMins}:${String(currentSecs).padStart(2, '0')} / ${totalMins}:${String(totalSecs).padStart(2, '0')}`;
+        });
+
+        video.addEventListener('loadedmetadata', () => {
+            const totalMins = Math.floor(video.duration / 60);
+            const totalSecs = Math.floor(video.duration % 60);
+            videoTime.textContent = `0:00 / ${totalMins}:${String(totalSecs).padStart(2, '0')}`;
+        });
+
+        video.addEventListener('ended', () => {
+            isVideoPlaying = false;
+            videoPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+            videoPlayOverlay.classList.remove('hidden');
+            video.currentTime = 0;
+            videoProgressFill.style.width = '0%';
+            videoProgressDot.style.left = '0%';
+        });
+
+        // Click on progress bar to seek
+        videoProgress.addEventListener('click', (e) => {
+            const rect = videoProgress.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            video.currentTime = percent * video.duration;
+        });
+
+        // Fullscreen
+        videoFullscreenBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (videoWrapper.requestFullscreen) {
+                videoWrapper.requestFullscreen();
+            } else if (videoWrapper.webkitRequestFullscreen) {
+                videoWrapper.webkitRequestFullscreen();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === ' ' && desktop.classList.contains('active')) {
+                e.preventDefault();
+                if (!document.querySelector('.window.open')) {
+                    toggleVideoPlay();
+                }
             }
         });
 
@@ -1670,6 +2049,7 @@
         console.log('🎮 Guess The Memory Game: ada di Mini Game');
         console.log('📸 Foto: photo1.jpeg, photo2.jpeg, photo3.jpeg');
         console.log('📸 Memories: memory1.jpeg - memory6.jpeg');
+        console.log('🎬 Video: video-us.mp4 (siapkan file video)');
     </script>
 
 </body>
