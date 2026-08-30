@@ -179,14 +179,15 @@
             overflow: hidden;
         }
         #desktop.active { display: block; }
+
         .wallpaper {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at 20% 50%, rgba(255,107,157,0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 50%, rgba(107,157,255,0.1) 0%, transparent 50%),
+            background: radial-gradient(ellipse at 20% 50%, rgba(255,107,157,0.05) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 50%, rgba(107,157,255,0.05) 0%, transparent 50%),
                         linear-gradient(135deg, #0a0a0a, #1a0a1a);
             z-index: 0;
         }
@@ -284,7 +285,7 @@
         }
         .taskbar-time:hover { background: rgba(255,255,255,0.05); }
 
-        /* ===== DESKTOP ICONS ===== */
+        /* ===== DESKTOP ICONS (SIDEBAR KIRI) ===== */
         .desktop-icons {
             position: absolute;
             top: 20px;
@@ -292,7 +293,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, 80px);
             gap: 10px;
-            z-index: 1;
+            z-index: 2;
             padding-top: 20px;
         }
         .desktop-icon {
@@ -333,60 +334,57 @@
             font-size: 0.5rem;
         }
 
-        /* ===== VIDEO PLAYER (Desktop Memory) ===== */
+        /* ===== VIDEO PLAYER (FULL AREA DESKTOP) ===== */
         .desktop-video {
             position: absolute;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            width: 340px;
-            background: rgba(20,20,30,0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.06);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            top: 70px;
+            left: 200px;
+            right: 40px;
+            bottom: 80px;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
             overflow: hidden;
-            z-index: 5;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .desktop-video:hover {
-            transform: translateY(-50%) scale(1.02);
-            box-shadow: 0 25px 70px rgba(0,0,0,0.8);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .desktop-video .video-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
-            background: rgba(0,0,0,0.3);
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.4);
             border-bottom: 1px solid rgba(255,255,255,0.03);
+            flex-shrink: 0;
         }
 
         .desktop-video .video-header .video-title {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: rgba(255,255,255,0.7);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .desktop-video .video-header .video-title i {
             color: #ff6b9d;
-            font-size: 0.85rem;
+            font-size: 1rem;
         }
 
         .desktop-video .video-header .video-dots {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
 
         .desktop-video .video-header .video-dots span {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             display: block;
         }
@@ -397,18 +395,19 @@
 
         .desktop-video .video-wrapper {
             position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
+            flex: 1;
             background: #0a0a0a;
             overflow: hidden;
             cursor: pointer;
+            min-height: 0;
         }
 
         .desktop-video .video-wrapper video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
+            background: #0a0a0a;
         }
 
         .desktop-video .video-wrapper .video-play-overlay {
@@ -420,41 +419,44 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.3);
-            transition: opacity 0.4s ease;
+            background: rgba(0,0,0,0.2);
+            transition: opacity 0.5s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .desktop-video .video-wrapper .video-play-overlay.visible {
             opacity: 1;
             pointer-events: none;
         }
 
-        .desktop-video .video-wrapper .video-play-overlay.hidden {
-            opacity: 0;
-        }
-
         .desktop-video .video-wrapper .video-play-overlay i {
-            font-size: 3.5rem;
-            color: rgba(255,255,255,0.8);
-            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
+            font-size: 4.5rem;
+            color: rgba(255,255,255,0.7);
+            text-shadow: 0 4px 40px rgba(0,0,0,0.6);
         }
 
-        .desktop-video .video-wrapper .video-play-overlay i:hover {
-            transform: scale(1.1);
+        .desktop-video .video-wrapper:hover .video-play-overlay.visible {
+            opacity: 1;
         }
 
         /* Video Controls */
         .desktop-video .video-controls {
-            padding: 10px 14px 12px;
-            background: rgba(0,0,0,0.4);
+            padding: 12px 20px 14px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            flex-shrink: 0;
         }
 
         .desktop-video .video-controls .video-progress {
             width: 100%;
-            height: 3px;
-            background: rgba(255,255,255,0.1);
+            height: 4px;
+            background: rgba(255,255,255,0.08);
             border-radius: 4px;
             cursor: pointer;
             position: relative;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .desktop-video .video-controls .video-progress .progress-fill {
@@ -469,13 +471,13 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: #ff6b9d;
             border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
             left: 0%;
-            margin-left: -5px;
+            margin-left: -6px;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -493,14 +495,14 @@
         .desktop-video .video-controls .video-buttons .left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
 
         .desktop-video .video-controls .video-buttons .left button {
             background: none;
             border: none;
             color: rgba(255,255,255,0.6);
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             padding: 4px;
@@ -512,7 +514,7 @@
         }
 
         .desktop-video .video-controls .video-buttons .left button.play-btn {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: rgba(255,255,255,0.8);
         }
 
@@ -521,17 +523,18 @@
         }
 
         .desktop-video .video-controls .video-buttons .time {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: rgba(255,255,255,0.4);
             font-family: 'Space Mono', monospace;
             letter-spacing: 0.5px;
+            min-width: 100px;
         }
 
         .desktop-video .video-controls .video-buttons .right button {
             background: none;
             border: none;
             color: rgba(255,255,255,0.4);
-            font-size: 0.9rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             padding: 4px;
@@ -1103,6 +1106,7 @@
             line-height: 1.8;
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .intro-title { font-size: 2.5rem; }
             .boot-title { font-size: 2rem; }
@@ -1118,11 +1122,19 @@
             .game-option-app { padding: 10px 8px; font-size: 0.8rem; }
             .game-photo-app { aspect-ratio: 4/3; }
             .desktop-video {
-                width: 280px;
-                right: 15px;
-                top: 55%;
+                top: 60px;
+                left: 160px;
+                right: 20px;
+                bottom: 70px;
+                border-radius: 14px;
             }
-            .desktop-video .video-wrapper { aspect-ratio: 16/9; }
+            .desktop-video .video-header { padding: 10px 16px; }
+            .desktop-video .video-header .video-title { font-size: 0.75rem; }
+            .desktop-video .video-controls { padding: 10px 16px 12px; }
+            .desktop-video .video-controls .video-buttons .left { gap: 12px; }
+            .desktop-video .video-controls .video-buttons .left button { font-size: 0.9rem; }
+            .desktop-video .video-controls .video-buttons .left button.play-btn { font-size: 1.2rem; }
+            .desktop-video .video-controls .video-buttons .time { font-size: 0.6rem; min-width: 80px; }
         }
 
         @media (max-width: 480px) {
@@ -1152,18 +1164,21 @@
             .game-feedback-app .feedback-text { font-size: 1rem; }
             .game-photo-app { aspect-ratio: 4/3; }
             .desktop-video {
-                width: 200px;
+                top: 50px;
+                left: 10px;
                 right: 10px;
-                top: 50%;
-                transform: translateY(-50%) scale(0.9);
+                bottom: 60px;
+                border-radius: 12px;
             }
-            .desktop-video:hover { transform: translateY(-50%) scale(0.92); }
-            .desktop-video .video-header .video-title { font-size: 0.6rem; }
-            .desktop-video .video-controls { padding: 6px 10px 8px; }
-            .desktop-video .video-controls .video-buttons .left { gap: 8px; }
-            .desktop-video .video-controls .video-buttons .left button { font-size: 0.8rem; }
+            .desktop-video .video-header { padding: 8px 12px; }
+            .desktop-video .video-header .video-title { font-size: 0.65rem; gap: 6px; }
+            .desktop-video .video-header .video-dots span { width: 7px; height: 7px; }
+            .desktop-video .video-controls { padding: 8px 12px 10px; }
+            .desktop-video .video-controls .video-buttons .left { gap: 10px; }
+            .desktop-video .video-controls .video-buttons .left button { font-size: 0.75rem; }
             .desktop-video .video-controls .video-buttons .left button.play-btn { font-size: 1rem; }
-            .desktop-video .video-controls .video-buttons .time { font-size: 0.5rem; }
+            .desktop-video .video-controls .video-buttons .time { font-size: 0.5rem; min-width: 70px; }
+            .desktop-video .video-controls .video-buttons .right button { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -1174,7 +1189,7 @@
         <div id="introImage"></div>
         <div class="intro-overlay">
             <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
+            <div class="intro-subtitle"> hasil kerja keras pacarmu]</div>
             <button class="intro-btn" id="startBtn">
                 <i class="fas fa-play"></i> Mulai Petualangan
             </button>
@@ -1200,7 +1215,7 @@
     <div id="desktop">
         <div class="wallpaper"></div>
 
-        <!-- DESKTOP ICONS -->
+        <!-- DESKTOP ICONS (SIDEBAR KIRI) -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-app="memories"><div class="icon">📸</div><div class="label">Memories</div></div>
             <div class="desktop-icon" data-app="chat"><div class="icon">💬</div><div class="label">Our Chat</div></div>
@@ -1211,7 +1226,7 @@
             <div class="desktop-icon locked" data-app="secret"><div class="icon">🎁</div><div class="label">Secret File</div></div>
         </div>
 
-        <!-- ===== VIDEO PLAYER (Desktop Memory) ===== -->
+        <!-- ===== VIDEO PLAYER (FULL AREA DESKTOP) ===== -->
         <div class="desktop-video" id="desktopVideo">
             <div class="video-header">
                 <div class="video-title">
@@ -1228,7 +1243,7 @@
                     <source src="video-us.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
-                <div class="video-play-overlay" id="videoPlayOverlay">
+                <div class="video-play-overlay visible" id="videoPlayOverlay">
                     <i class="fas fa-play-circle"></i>
                 </div>
             </div>
@@ -1578,12 +1593,12 @@
                 video.play();
                 isVideoPlaying = true;
                 videoPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                videoPlayOverlay.classList.add('hidden');
+                videoPlayOverlay.classList.remove('visible');
             } else {
                 video.pause();
                 isVideoPlaying = false;
                 videoPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
-                videoPlayOverlay.classList.remove('hidden');
+                videoPlayOverlay.classList.add('visible');
             }
         }
 
@@ -1594,7 +1609,11 @@
 
         videoPlayOverlay.addEventListener('click', toggleVideoPlay);
 
-        videoWrapper.addEventListener('click', toggleVideoPlay);
+        videoWrapper.addEventListener('click', (e) => {
+            // Jangan trigger kalau klik di kontrol atau tombol
+            if (e.target.closest('.video-controls') || e.target.closest('.video-header')) return;
+            toggleVideoPlay();
+        });
 
         // Mute/Unmute
         videoMuteBtn.addEventListener('click', (e) => {
@@ -1626,7 +1645,7 @@
         video.addEventListener('ended', () => {
             isVideoPlaying = false;
             videoPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
-            videoPlayOverlay.classList.remove('hidden');
+            videoPlayOverlay.classList.add('visible');
             video.currentTime = 0;
             videoProgressFill.style.width = '0%';
             videoProgressDot.style.left = '0%';
@@ -1654,7 +1673,9 @@
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
             if (e.key === ' ' && desktop.classList.contains('active')) {
                 e.preventDefault();
-                if (!document.querySelector('.window.open')) {
+                // Cek apakah ada window yang terbuka
+                const openWindow = document.querySelector('.window.open');
+                if (!openWindow) {
                     toggleVideoPlay();
                 }
             }
@@ -2050,6 +2071,7 @@
         console.log('📸 Foto: photo1.jpeg, photo2.jpeg, photo3.jpeg');
         console.log('📸 Memories: memory1.jpeg - memory6.jpeg');
         console.log('🎬 Video: video-us.mp4 (siapkan file video)');
+        console.log('🎬 Video mode: FULL AREA DESKTOP');
     </script>
 
 </body>
