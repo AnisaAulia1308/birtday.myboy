@@ -288,59 +288,76 @@
         /* ===== DESKTOP ICONS (SIDEBAR KIRI) ===== */
         .desktop-icons {
             position: absolute;
-            top: 20px;
+            top: 70px;
             left: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 80px);
-            gap: 10px;
-            z-index: 2;
-            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+            padding: 10px 15px 20px 15px;
+            background: rgba(20,20,30,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.03);
+            min-width: 90px;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
         }
+        .desktop-icons::-webkit-scrollbar {
+            width: 2px;
+        }
+        .desktop-icons::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
         .desktop-icon {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px 5px;
+            padding: 10px 8px;
             border-radius: 12px;
             cursor: pointer;
             transition: 0.3s;
             background: rgba(255,255,255,0.02);
             border: 1px solid transparent;
-            gap: 6px;
+            gap: 4px;
             color: #fff;
             text-align: center;
+            min-width: 70px;
         }
         .desktop-icon:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.08);
             border-color: rgba(255,255,255,0.1);
             transform: scale(1.05);
         }
         .desktop-icon .icon {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: #ff6b9d;
         }
         .desktop-icon .label {
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             color: rgba(255,255,255,0.8);
             font-weight: 300;
-            max-width: 70px;
+            max-width: 60px;
             word-wrap: break-word;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            line-height: 1.2;
         }
         .desktop-icon.locked .icon { color: #444; }
         .desktop-icon.locked .label::after {
             content: ' 🔒';
-            font-size: 0.5rem;
+            font-size: 0.4rem;
         }
 
-        /* ===== VIDEO PLAYER (FULL AREA DESKTOP) ===== */
+        /* ===== VIDEO PLAYER (AREA KANAN) ===== */
         .desktop-video {
             position: absolute;
             top: 70px;
-            left: 200px;
-            right: 40px;
-            bottom: 80px;
+            left: 140px;
+            right: 30px;
+            bottom: 70px;
             background: rgba(10,10,10,0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -351,6 +368,7 @@
             z-index: 1;
             display: flex;
             flex-direction: column;
+            transition: all 0.3s ease;
         }
 
         .desktop-video .video-header {
@@ -553,8 +571,8 @@
         .window {
             position: absolute;
             top: 10%;
-            left: 10%;
-            width: 80%;
+            left: 15%;
+            width: 70%;
             height: 75%;
             background: rgba(20,20,30,0.95);
             backdrop-filter: blur(20px);
@@ -1112,20 +1130,26 @@
             .boot-title { font-size: 2rem; }
             .boot-progress { width: 200px; }
             .window { top: 5%; left: 5%; width: 90%; height: 85%; }
-            .desktop-icons { grid-template-columns: repeat(auto-fill, 70px); gap: 5px; }
-            .desktop-icon .icon { font-size: 1.8rem; }
-            .desktop-icon .label { font-size: 0.55rem; }
-            .memory-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-            .memory-item img { height: 100px; }
-            .game-container-app { padding: 10px; }
-            .game-options-app { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .game-option-app { padding: 10px 8px; font-size: 0.8rem; }
-            .game-photo-app { aspect-ratio: 4/3; }
+            
+            .desktop-icons {
+                top: 60px;
+                left: 10px;
+                padding: 8px 10px 12px 10px;
+                gap: 8px;
+                min-width: 70px;
+            }
+            .desktop-icon {
+                padding: 8px 6px;
+                min-width: 55px;
+            }
+            .desktop-icon .icon { font-size: 1.5rem; }
+            .desktop-icon .label { font-size: 0.5rem; max-width: 50px; }
+            
             .desktop-video {
                 top: 60px;
-                left: 160px;
-                right: 20px;
-                bottom: 70px;
+                left: 100px;
+                right: 15px;
+                bottom: 60px;
                 border-radius: 14px;
             }
             .desktop-video .video-header { padding: 10px 16px; }
@@ -1135,21 +1159,55 @@
             .desktop-video .video-controls .video-buttons .left button { font-size: 0.9rem; }
             .desktop-video .video-controls .video-buttons .left button.play-btn { font-size: 1.2rem; }
             .desktop-video .video-controls .video-buttons .time { font-size: 0.6rem; min-width: 80px; }
+            
+            .memory-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .memory-item img { height: 100px; }
+            .game-container-app { padding: 10px; }
+            .game-options-app { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .game-option-app { padding: 10px 8px; font-size: 0.8rem; }
         }
 
         @media (max-width: 480px) {
             .intro-title { font-size: 2rem; }
             .intro-btn { padding: 12px 30px; font-size: 0.9rem; }
             .window { top: 2%; left: 2%; width: 96%; height: 92%; border-radius: 8px; }
-            .desktop-icons { grid-template-columns: repeat(auto-fill, 60px); gap: 5px; top: 10px; left: 10px; }
-            .desktop-icon { padding: 10px 5px; }
-            .desktop-icon .icon { font-size: 1.5rem; }
-            .taskbar { height: 40px; padding: 0 10px; }
-            .taskbar-start { font-size: 0.7rem; padding: 3px 10px; }
-            .taskbar-app { font-size: 0.5rem; padding: 2px 6px; }
-            .taskbar-time { font-size: 0.6rem; padding: 3px 6px; }
-            .window-body { padding: 12px; }
-            .falling-item { width: 40px !important; height: 40px !important; }
+            
+            .desktop-icons {
+                top: 50px;
+                left: 6px;
+                padding: 6px 8px 10px 8px;
+                gap: 6px;
+                min-width: 55px;
+                border-radius: 12px;
+            }
+            .desktop-icon {
+                padding: 6px 4px;
+                min-width: 45px;
+                border-radius: 8px;
+            }
+            .desktop-icon .icon { font-size: 1.2rem; }
+            .desktop-icon .label { font-size: 0.4rem; max-width: 40px; }
+            
+            .desktop-video {
+                top: 50px;
+                left: 75px;
+                right: 8px;
+                bottom: 50px;
+                border-radius: 12px;
+            }
+            .desktop-video .video-header { padding: 6px 10px; }
+            .desktop-video .video-header .video-title { font-size: 0.6rem; gap: 5px; }
+            .desktop-video .video-header .video-dots span { width: 7px; height: 7px; }
+            .desktop-video .video-controls { padding: 6px 10px 8px; }
+            .desktop-video .video-controls .video-progress { height: 3px; margin-bottom: 6px; }
+            .desktop-video .video-controls .video-buttons .left { gap: 8px; }
+            .desktop-video .video-controls .video-buttons .left button { font-size: 0.75rem; }
+            .desktop-video .video-controls .video-buttons .left button.play-btn { font-size: 1rem; }
+            .desktop-video .video-controls .video-buttons .time { font-size: 0.5rem; min-width: 60px; }
+            .desktop-video .video-controls .video-buttons .right button { font-size: 0.75rem; }
+            
+            .desktop-video .video-wrapper .video-play-overlay i { font-size: 3rem; }
+            
             .memory-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
             .memory-item { padding: 8px; }
             .memory-item img { height: 80px; border-radius: 6px; }
@@ -1162,23 +1220,13 @@
             .game-option-app { padding: 8px 6px; font-size: 0.7rem; border-radius: 8px; }
             .game-question-app { font-size: 0.95rem; }
             .game-feedback-app .feedback-text { font-size: 1rem; }
-            .game-photo-app { aspect-ratio: 4/3; }
-            .desktop-video {
-                top: 50px;
-                left: 10px;
-                right: 10px;
-                bottom: 60px;
-                border-radius: 12px;
-            }
-            .desktop-video .video-header { padding: 8px 12px; }
-            .desktop-video .video-header .video-title { font-size: 0.65rem; gap: 6px; }
-            .desktop-video .video-header .video-dots span { width: 7px; height: 7px; }
-            .desktop-video .video-controls { padding: 8px 12px 10px; }
-            .desktop-video .video-controls .video-buttons .left { gap: 10px; }
-            .desktop-video .video-controls .video-buttons .left button { font-size: 0.75rem; }
-            .desktop-video .video-controls .video-buttons .left button.play-btn { font-size: 1rem; }
-            .desktop-video .video-controls .video-buttons .time { font-size: 0.5rem; min-width: 70px; }
-            .desktop-video .video-controls .video-buttons .right button { font-size: 0.8rem; }
+            
+            .taskbar { height: 40px; padding: 0 10px; }
+            .taskbar-start { font-size: 0.7rem; padding: 3px 10px; }
+            .taskbar-app { font-size: 0.5rem; padding: 2px 6px; }
+            .taskbar-time { font-size: 0.6rem; padding: 3px 6px; }
+            .window-body { padding: 12px; }
+            .falling-item { width: 40px !important; height: 40px !important; }
         }
     </style>
 </head>
@@ -1189,7 +1237,7 @@
         <div id="introImage"></div>
         <div class="intro-overlay">
             <div class="intro-title">✨ Happy Birthday, Sayang! ✨</div>
-            <div class="intro-subtitle"> hasil kerja keras pacarmu]</div>
+            <div class="intro-subtitle">A FILM BY [NAMA KAMU]</div>
             <button class="intro-btn" id="startBtn">
                 <i class="fas fa-play"></i> Mulai Petualangan
             </button>
@@ -1226,7 +1274,7 @@
             <div class="desktop-icon locked" data-app="secret"><div class="icon">🎁</div><div class="label">Secret File</div></div>
         </div>
 
-        <!-- ===== VIDEO PLAYER (FULL AREA DESKTOP) ===== -->
+        <!-- ===== VIDEO PLAYER (AREA KANAN) ===== -->
         <div class="desktop-video" id="desktopVideo">
             <div class="video-header">
                 <div class="video-title">
@@ -1610,7 +1658,6 @@
         videoPlayOverlay.addEventListener('click', toggleVideoPlay);
 
         videoWrapper.addEventListener('click', (e) => {
-            // Jangan trigger kalau klik di kontrol atau tombol
             if (e.target.closest('.video-controls') || e.target.closest('.video-header')) return;
             toggleVideoPlay();
         });
@@ -1673,7 +1720,6 @@
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
             if (e.key === ' ' && desktop.classList.contains('active')) {
                 e.preventDefault();
-                // Cek apakah ada window yang terbuka
                 const openWindow = document.querySelector('.window.open');
                 if (!openWindow) {
                     toggleVideoPlay();
@@ -2071,7 +2117,7 @@
         console.log('📸 Foto: photo1.jpeg, photo2.jpeg, photo3.jpeg');
         console.log('📸 Memories: memory1.jpeg - memory6.jpeg');
         console.log('🎬 Video: video-us.mp4 (siapkan file video)');
-        console.log('🎬 Video mode: FULL AREA DESKTOP');
+        console.log('🎬 Layout: SIDEBAR | VIDEO');
     </script>
 
 </body>
